@@ -1,7 +1,5 @@
 package web.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
@@ -20,7 +18,6 @@ public class AdminController {
     @Autowired
     public AdminController(UserService userService) {
         this.userService = userService;
-
     }
 
     @GetMapping(value = "/")
