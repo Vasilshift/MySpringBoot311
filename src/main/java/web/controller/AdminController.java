@@ -1,7 +1,9 @@
 package web.controller;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
+import web.service.RoleService;
 import web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,14 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final RoleService roleService;
+    private final BCryptPasswordEncoder bcryptpasswordEncoder;
 
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, RoleService roleService, BCryptPasswordEncoder bcryptpasswordEncoder) {
         this.userService = userService;
+        this.roleService = roleService;
+        this.bcryptpasswordEncoder = bcryptpasswordEncoder;
     }
 
     @GetMapping(value = "/")
@@ -38,23 +44,21 @@ public class AdminController {
     }
 
     @GetMapping("/user-create")
-    public String createUserForm(User user){
+    public String createUserForm(@ModelAttribute("user") User user){
         return "user-create";
     }
 
     @PostMapping("/user-create")
-    public String createUser(@ModelAttribute("user") User user,
-                             @RequestParam(required = false, name = "roleAdmin") String roleAdmin
+    public String createUser(User user,
+                             @RequestParam("roleView") String[] roleView
                             ) {
-        if (roleAdmin != null) {
-            userService.saveUser(userService.addRoleToUser(user, userService.getRoleByRolename("ROLE_ADMIN")));
-        } else {
-            userService.saveUser(userService.addRoleToUser(user, userService.getRoleByRolename("ROLE_USER")));
-        }
+        userService.addRolesToUser(user, roleView);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @GetMapping("user-delete/{id}")
+
+    @RequestMapping(value = "/user-delete/{id}", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable("id") Long id){
         userService.deleteById(id);
         return "redirect:/admin";
@@ -68,15 +72,12 @@ public class AdminController {
     }
 
     @PostMapping("/user-update")
-    public String updateUser(User user,
-                             @RequestParam(required = false, name = "roleAdmin") String roleAdmin){
-        if (roleAdmin != null) {
-            userService.saveUser(userService.addRoleToUser(user, userService.getRoleByRolename("ROLE_ADMIN")));
-        } else {
-            userService.saveUser(userService.addRoleToUser(user, userService.getRoleByRolename("ROLE_USER")));
-        }
-
-        //userService.saveUser(user);
+    //@RequestMapping(value  = "/user-update", method = RequestMethod.POST)
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam("roleView") String[] roleView){
+        user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
+        userService.addRolesToUser(user, roleView);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 }
