@@ -19,7 +19,6 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-
     public Set<Role> updateRoles(String[] roleView) {
         Set<Role> roleList = new HashSet<>();
         for (String role : roleView) {
@@ -31,9 +30,5 @@ public class RoleService {
         }
         return roleList;
     }
-
-
-
-
 
 }

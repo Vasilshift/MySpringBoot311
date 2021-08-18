@@ -50,31 +50,28 @@ public class AdminController {
 
     @PostMapping("/user-create")
     public String createUser(User user,
-                             @RequestParam("roleView") String[] roleView
-                            ) {
+                             @RequestParam("roleView") String[] roleView) {
         userService.addRolesToUser(user, roleView);
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
-
-    @RequestMapping(value = "/user-delete/{id}", method = RequestMethod.DELETE)
-    public String deleteUser(@PathVariable("id") Long id){
+    @RequestMapping(value = "/user-delete/{id}", method={RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }
 
     @GetMapping("/user-update/{id}")
-    public String updateUserForm(@PathVariable("id") Long id, Model model){
+    public String updateUserForm(@PathVariable("id") Long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
         return "user-update";
     }
 
     @PostMapping("/user-update")
-    //@RequestMapping(value  = "/user-update", method = RequestMethod.POST)
     public String updateUser(@ModelAttribute("user") User user,
-                             @RequestParam("roleView") String[] roleView){
+                             @RequestParam("roleView") String[] roleView) {
         user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
         userService.addRolesToUser(user, roleView);
         userService.saveUser(user);

@@ -57,8 +57,4 @@ public class UserService  {
         user.setRoles(roleList);
     }
 
-//    public Role getRoleByRolename(String rolename) {
-//        return roleRepository.findByRole(rolename);
-//    }
-
 }
