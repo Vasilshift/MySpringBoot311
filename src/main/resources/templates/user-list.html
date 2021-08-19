@@ -24,9 +24,13 @@
                 <td th:text="${user.username}"></td>
                 <td th:text="${user.password}"></td>
                 <td><span th:text="${user.getAuthorities()}"> roles </span></td>
-
                 <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+<!--                <td><a th:method="DELETE" th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>-->
+                <td>
+                <form th:method="DELETE" th:action="@{user-delete/{id}(id=${user.id})}">
+                    <input type="submit" value="delete">
+                </form>
+                </td>
             </tr>
             </tbody>
         </table>

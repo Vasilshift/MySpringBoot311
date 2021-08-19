@@ -49,14 +49,13 @@ public class AdminController {
     }
 
     @PostMapping("/user-create")
-    public String createUser(User user,
-                             @RequestParam("roleView") String[] roleView) {
+    public String createUser(User user, @RequestParam("roleView") String[] roleView) {
         userService.addRolesToUser(user, roleView);
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/user-delete/{id}", method={RequestMethod.DELETE, RequestMethod.GET})
+    @DeleteMapping(value = "/user-delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
