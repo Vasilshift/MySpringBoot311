@@ -1,17 +1,7 @@
 package web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import web.model.Role;
-import web.model.User;
-import web.repository.RoleRepository;
-import web.service.RoleService;
-import web.service.UserService;
-
-import javax.annotation.PostConstruct;
-import java.util.Collections;
 
 @SpringBootApplication
 public class SpringbootdemoApplication {

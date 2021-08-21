@@ -4,10 +4,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.RoleService;
-import web.service.UserService;
+import web.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import web.service.UserService;
+import web.service.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class AdminController {
         this.bcryptpasswordEncoder = bcryptpasswordEncoder;
     }
 
-    @GetMapping(value = "/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(Model model) {
         List<String> messages = new ArrayList<>();
         messages.add("Hello!");
@@ -36,20 +38,21 @@ public class AdminController {
         return "index";
     }
 
-    @GetMapping("/admin")
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String findAll(Model model){
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "user-list";
     }
 
-    @GetMapping("/user-create")
+    @RequestMapping(value = "/user-create", method = RequestMethod.GET)
     public String createUserForm(@ModelAttribute("user") User user){
         return "user-create";
     }
 
-    @PostMapping("/user-create")
+    @RequestMapping(value = "/user-create", method = RequestMethod.POST)
     public String createUser(User user, @RequestParam("roleView") String[] roleView) {
+        user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
         userService.addRolesToUser(user, roleView);
         userService.saveUser(user);
         return "redirect:/admin";

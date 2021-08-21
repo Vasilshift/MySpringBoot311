@@ -11,50 +11,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Service
-public class UserService  {
+public interface UserService  {
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    User findById(Long id);
 
-    @Autowired
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
+    List<User> findAll();
 
-    public User findById(Long id){
-        return userRepository.getOne(id);
-    }
+    void addRolesToUser(User user, String[] roleView);
 
-    public List<User> findAll(){
-        return userRepository.findAll();
-    }
+    User saveUser(User user);
 
-    public User saveUser(User user){
-        return userRepository.save(user);
-    }
+    void deleteById(Long id);
 
-    public void deleteById(Long id){
-        userRepository.deleteById(id);
-    }
+    User loadUserByUsername(String username);
 
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        return userRepository.findByUsername(username);
-
-    }
-
-    public void addRolesToUser(User user, String[] roleView) {
-        Set<Role> roleList = new HashSet<>();
-        for (String role : roleView) {
-            if (role.equals("ROLE_ADMIN")) {
-                roleList.add(roleRepository.findRoleByName("ROLE_ADMIN"));
-            } else if (role.equals("ROLE_USER")) {
-                roleList.add(roleRepository.findRoleByName("ROLE_USER"));
-            }
-        }
-        user.setRoles(roleList);
-    }
 
 }
