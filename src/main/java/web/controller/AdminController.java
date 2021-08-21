@@ -4,13 +4,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.RoleService;
-import web.service.RoleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import web.service.UserService;
-import web.service.UserServiceImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +15,11 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
-    private final RoleService roleService;
     private final BCryptPasswordEncoder bcryptpasswordEncoder;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService, BCryptPasswordEncoder bcryptpasswordEncoder) {
+    public AdminController(UserService userService, BCryptPasswordEncoder bcryptpasswordEncoder) {
         this.userService = userService;
-        this.roleService = roleService;
         this.bcryptpasswordEncoder = bcryptpasswordEncoder;
     }
 
@@ -58,20 +53,20 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @DeleteMapping(value = "/user-delete/{id}")
+    @RequestMapping(value ="/user-delete/{id}", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";
     }
 
-    @GetMapping("/user-update/{id}")
+    @RequestMapping(value = "/user-update/{id}", method = RequestMethod.GET)
     public String updateUserForm(@PathVariable("id") Long id, Model model) {
         User user = userService.findById(id);
         model.addAttribute("user", user);
         return "user-update";
     }
 
-    @PostMapping("/user-update")
+    @RequestMapping(value = "/user-update", method = RequestMethod.POST)
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam("roleView") String[] roleView) {
         user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
