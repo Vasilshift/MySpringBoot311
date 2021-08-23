@@ -109,6 +109,18 @@
     let output = ''
     const requrl = 'http://localhost:8080/api/users'
 
+    function rol(u) {
+    let userRole = "[";
+    for (let i = 0; i < u.roles.length; i++) {
+        userRole += u.roles[i].name.substring(5);
+        if (i != (u.roles.length - 1)) {
+            userRole += ", ";
+        }
+    }
+    userRole += "]";
+    return userRole;
+}
+
     function sendRequest(){
         return (
             fetch(requrl).then(
@@ -124,12 +136,12 @@
                                 temp += "<td>" + u.lastname + "</td>"
                                 temp += "<td>" + u.age + "</td>"
                                 temp += "<td>" + u.email + "</td>"
-                                temp += "<td>" + u.roles + "</td>"
+                                temp += "<td>" + rol(u) + "</td>"
                                 temp += "<td><button type='button' class='btn btn-primary' id='open-popup1'>Edit</button></td>"
                                 temp += "<td><button type='button' class='btn btn-danger' id='open-popup1'>Delete</button></td>"
                                 temp += "</tr>"
                             })
-                            document.querySelector(".table-users-object").innerHTML = temp;
+                            a.innerHTML = temp;
                         })
                 })
         )
