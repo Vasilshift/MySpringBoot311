@@ -40,38 +40,38 @@ public class AdminController {
         return "user-list";
     }
 
-    @RequestMapping(value = "/user-create", method = RequestMethod.GET)
-    public String createUserForm(@ModelAttribute("user") User user){
-        return "user-create";
-    }
-
-    @RequestMapping(value = "/user-create", method = RequestMethod.POST)
-    public String createUser(User user, @RequestParam("roleView") String[] roleView) {
-        user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
-        userService.addRolesToUser(user, roleView);
-        userService.saveUser(user);
-        return "redirect:/admin";
-    }
-
-    @RequestMapping(value ="/user-delete/{id}", method = RequestMethod.DELETE)
-    public String deleteUser(@PathVariable("id") Long id) {
-        userService.deleteById(id);
-        return "redirect:/admin";
-    }
-
-    @RequestMapping(value = "/user-update/{id}", method = RequestMethod.GET)
-    public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
-        return "user-update";
-    }
-
-    @RequestMapping(value = "/user-update", method = RequestMethod.POST)
-    public String updateUser(@ModelAttribute("user") User user,
-                             @RequestParam("roleView") String[] roleView) {
-        user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
-        userService.addRolesToUser(user, roleView);
-        userService.saveUser(user);
-        return "redirect:/admin";
-    }
+//    @RequestMapping(value = "/user-create", method = RequestMethod.GET)
+//    public String createUserForm(@ModelAttribute("user") User user){
+//        return "user-create";
+//    }
+//
+//    @RequestMapping(value = "/user-create", method = RequestMethod.POST)
+//    public String createUser(User user, @RequestParam("roleView") String[] roleView) {
+//        user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
+//        userService.addRolesToUser(user, roleView);
+//        userService.saveUser(user);
+//        return "redirect:/admin";
+//    }
+//
+//    @RequestMapping(value ="/user-delete/{id}", method = RequestMethod.DELETE)
+//    public String deleteUser(@PathVariable("id") Long id) {
+//        userService.deleteById(id);
+//        return "redirect:/admin";
+//    }
+//
+//    @RequestMapping(value = "/user-update/{id}", method = RequestMethod.GET)
+//    public String updateUserForm(@PathVariable("id") Long id, Model model) {
+//        User user = userService.findById(id);
+//        model.addAttribute("user", user);
+//        return "user-update";
+//    }
+//
+//    @RequestMapping(value = "/user-update", method = RequestMethod.POST)
+//    public String updateUser(@ModelAttribute("user") User user,
+//                             @RequestParam("roleView") String[] roleView) {
+//        user.setPassword(bcryptpasswordEncoder.encode(user.getPassword()));
+//        userService.addRolesToUser(user, roleView);
+//        userService.saveUser(user);
+//        return "redirect:/admin";
+//    }
 }
