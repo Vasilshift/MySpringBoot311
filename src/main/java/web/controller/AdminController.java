@@ -34,9 +34,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public String findAll(Model model){
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
+    public String findAll(){
+//        List<User> users = userService.findAll();
+//        model.addAttribute("users", users);
         return "user-list";
     }
 

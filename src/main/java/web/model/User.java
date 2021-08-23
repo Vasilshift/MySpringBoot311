@@ -5,8 +5,10 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -25,6 +27,12 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "age")
+    private int age;
+
+    @Column(name = "email")
+    private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
@@ -59,5 +67,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "roles=" + roles +
+                '}';
+    }
+
+        public String getNameRole(){
+        ArrayList<Role> roles = new ArrayList<>(getRoles());
+        String role = roles.stream().map(Role::getName).map(t -> t.toString().replace("ROLE_", "")).collect(Collectors.joining(" "));
+        return role;
     }
 }

@@ -1,43 +1,153 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="/css/styles.css" rel="stylesheet">
+<!--    <link rel="stylesheet" href="/css/modal.css">-->
+
+
+    <title>Main page</title>
 </head>
 <body>
-<div th:switch="${users}">
-    <h2 th:case="null">No users found!</h2>
-    <div th:case="*">
-        <h2>Users</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>username</th>
-                <th> roles </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.username}"></td>
-                <td><span th:text="${user.getAuthorities()}"> roles </span></td>
-                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td>
-                <form th:method="DELETE" th:action="@{user-delete/{id}(id=${user.id})}">
-                    <input type="submit" value="delete">
-                </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+<div th:insert="blocks/header :: name-header"></div>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Общий контейнер для табов -->
+        <div class="tabs">
+            <div class="col-2 left-col">
+                <div class="row">
+                    <!--  Контейнер с вкладками   -->
+                    <ul class="tab-header">
+                        <li class="tab-header__item js-tab-trigger active" data-tab="1">Admin</li>
+                        <li class="tab-header__item js-tab-trigger" data-tab="2">User</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-10 left-col">
+                <!--  Контейнер с блоками, которые содержат контент вкладок   -->
+                <ul class="tab-content">
+                    <li class="tab-content__item js-tab-content active" data-tab="1">
+                        <div class="left-col col-10 vh-100">
+
+                            <div class="tabs">
+                                <div class="comtainer mt-5">
+                                    <h2>Admin panel</h2>
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+                                                    aria-controls="home" aria-selected="true">Users table</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+                                                    aria-controls="profile" aria-selected="false">New user</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                            <div class="table-users">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Id</th>
+                                                        <th scope="col">username</th>
+                                                        <th scope="col">lastname</th>
+                                                        <th scope="col">Age</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Role</th>
+                                                        <th scope="col">Edit</th>
+                                                        <th scope="col">Delete</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody class="table-users-object">
+
+
+                                                    </tbody>
+
+                                                </table>
+
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+<!--                                            <div th:insert="blocks/new-user-block :: new-user-block"></div>-->
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </li>
+                    <li class="tab-content__item js-tab-content" data-tab="2">
+                        <div th:insert="blocks/one-user-in-main :: name-user"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <p><a href="/user-create">Create user</a></p>
 </div>
 
-<div>
-    <a href="/logout">logout</a>
+<!--modal window-->
+<div class="vmodal">
+    <div class="moal-overlay">
+        <div class="modal-window"></div>
+    </div>
 </div>
 
+<script>
+    const a = document.querySelector('.table-users-object')
+    let output = ''
+    const requrl = 'http://localhost:8080/api/users'
+
+    function sendRequest(){
+        return (
+            fetch(requrl).then(
+                res => {
+                    res.json().then(
+                        data => {
+                            console.log(data);
+                            let temp = "";
+                            data.forEach((u) => {
+                                temp += '<tr>'
+                                temp += '<td>' + u.id + '</td>'
+                                temp += '<td>' + u.username + '</td>'
+                                temp += "<td>" + u.lastname + "</td>"
+                                temp += "<td>" + u.age + "</td>"
+                                temp += "<td>" + u.email + "</td>"
+                                temp += "<td>" + u.roles + "</td>"
+                                temp += "<td><button type='button' class='btn btn-primary' id='open-popup1'>Edit</button></td>"
+                                temp += "<td><button type='button' class='btn btn-danger' id='open-popup1'>Delete</button></td>"
+                                temp += "</tr>"
+                            })
+                            document.querySelector(".table-users-object").innerHTML = temp;
+                        })
+                })
+        )
+    }
+
+
+    sendRequest()
+
+
+</script>
+
+<!--<script src="/js/base.js"></script>-->
+<!--<script src="/plugins/modal.js"></script>-->
+<!--<script src="js/main.js"></script>-->
+<!--<script src="/js/index.js"></script>-->
+<script src="../js/main-tabs.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
