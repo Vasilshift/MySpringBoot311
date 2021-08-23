@@ -19,14 +19,14 @@ public class Role implements GrantedAuthority{
     @Column(name = "role")
     private String name;
 
-    public Role(Long id, String name, Set<User> users) {
+    public Role(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.users = users;
+
     }
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
-    private Set<User> users;
+//    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+//    private Set<User> users;
 
     public Role() { }
 
