@@ -42,8 +42,9 @@ public class MyRestController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> add(@RequestBody User user){
-        //roleService.updateRoles(user);
+    public ResponseEntity<User> add(@RequestBody User user,  @RequestParam("roleView") String[] roleView){
+//        roleService.updateRoles(roleView);
+        userService.addRolesToUser(user, roleView);
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
