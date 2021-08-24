@@ -14,15 +14,11 @@ function rol(u) {
     return userRole;
 }
 
-
-// fetch('http:localhost:8080/api/users').then(
-//         res => {
-//             res.json().then(
-//                 data => {
-//                     console.log('Display 1 user from database', data);
-//                 }
-//             )
-//         })
+let allUsers;
+fetch('http://localhost:8080/api/users')
+    .then(res => res.json())
+    .then(data => allUsers = data)
+    .then(() => console.log(allUsers))
 
 
 function sendRequest(){
@@ -40,7 +36,7 @@ function sendRequest(){
                             temp += "<td>" + u.age + "</td>"
                             temp += "<td>" + u.email + "</td>"
                             temp += "<td>" + rol(u) + "</td>"
-                            temp += "<a href='#' class='btn btn-primary' data-btn='editUser' data-id='${u.id}'>Edit</a>"
+                            temp += '<a href="#" class="btn btn-primary" data-btn="editUser" data-id=' + u.id + '>Edit</a>'
                             temp += "<td><button type='button' class='btn btn-danger' id='open-popup1'>Delete</button></td>"
                             temp += "</tr>"
                         })
@@ -53,22 +49,18 @@ function sendRequest(){
 
 sendRequest()
 
-// let obj;
-// fetch('http:localhost:8080/api/users/1')
-//     .then(res => res.json())
-//     .then(data => obj = data)
-//     .then(() => console.log('one User from DB = ', obj))
+
 
 
 document.addEventListener('click', event => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
     const id = event.target.dataset.id
-    //const oneUserfromDB = usersFromDB.find(f => f.id === id)
-    //console.log('One user from DB: ', hg.getElementById(id))
+    const oneUserfromDB = allUsers.find(f => f.id === id)
+    console.log('One user from DB: ', oneUserfromDB)
     if (btnType === 'editUser') {
         modalEditUser.open()
-        console.log()
+        console.log(oneUserfromDB)
     }
 })
 
