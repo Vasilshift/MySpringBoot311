@@ -32,4 +32,20 @@ public class RoleServiceImpl implements RoleService {
         return roleList;
     }
 
+    @Transactional
+    @Override
+    public String saveRole(String role) {
+        if (role.equals("ROLE_ADMIN")) {
+            role = "ROLE_ADMIN";
+        } else if (role.equals("ROLE_USER")) {
+            role = "ROLE_USER";
+        } return role;
+    }
+
+    @Transactional
+    @Override
+    public void addRole(Role role) {
+        roleRepository.save(role);
+    }
+
 }

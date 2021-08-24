@@ -8,6 +8,8 @@ import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
 
+import javax.annotation.PostConstruct;
+
 
 @RestController
 @RequestMapping("/api")
@@ -23,7 +25,7 @@ public class MyRestController {
     }
 
 //    @PostConstruct
-//    public void firstInit() {
+//    public void firstinit() {
 //        DBInitImpl.init();
 //    }
 
@@ -43,7 +45,7 @@ public class MyRestController {
 
     @PostMapping("/users")
     public ResponseEntity<User> add(@RequestBody User user,  @RequestParam("roleView") String[] roleView){
-//        roleService.updateRoles(roleView);
+        roleService.updateRoles(roleView);
         userService.addRolesToUser(user, roleView);
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);

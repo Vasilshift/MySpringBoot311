@@ -71,7 +71,7 @@ GM.modal = function (options) {
         destroy() {
             $modal.parentNode.removeChild($modal)
             $modal.removeEventListener('click', listener)
-            //destroyed = true
+            // destroyed = true
         },
         setContent(html) {
             $modal.querySelector('[data-content]').innerHTML = html

@@ -7,10 +7,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import web.model.Role;
 import web.model.User;
 import web.repository.RoleRepository;
+import web.service.RoleService;
 import web.service.UserService;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class SpringbootdemoApplication {
@@ -19,45 +22,43 @@ public class SpringbootdemoApplication {
 		SpringApplication.run(SpringbootdemoApplication.class, args);
 	}
 
-//	private UserService userService;
-//	private BCryptPasswordEncoder bcryptpasswordEncoder;
-//	private RoleRepository roleRepository;
+//    private final RoleRepository roleRepository;
+//    private final UserService userService;
+//    private final RoleService roleService;
+//    private BCryptPasswordEncoder bcryptpasswordEncoder;
 //
-//	@Autowired
-//	public SpringbootdemoApplication(UserService userService, BCryptPasswordEncoder bcryptpasswordEncoder, RoleRepository roleRepository) {
-//		this.userService = userService;
+//    @Autowired
+//    public SpringbootdemoApplication(RoleRepository roleRepository, UserService userService, RoleService roleService, BCryptPasswordEncoder bcryptpasswordEncoder) {
+//        this.roleRepository = roleRepository;
+//        this.userService = userService;
+//		this.roleService = roleService;
 //		this.bcryptpasswordEncoder = bcryptpasswordEncoder;
-//		this.roleRepository = roleRepository;
-//	}
+//    }
 //
-//	@PostConstruct
-//	void init(){
-//
-//		Role roleAdmin = new Role();
-//		roleAdmin.setId(1L);
-//		roleAdmin.setName("ROLE_ADMIN");
-//		roleRepository.save(roleAdmin);
-//
-//		Role roleUser = new Role();
-//		roleUser.setId(2L);
-//		roleUser.setName("ROLE_USER");
-//		roleRepository.save(roleUser);
-//
-//		User user1 = new User();
-//		user1.setUsername("admin");
-//		user1.setEmail("admin@mail.ru");
-//		user1.setAge(33);
-//		user1.setPassword(bcryptpasswordEncoder.encode("admin"));
-//		user1.setRoles(Collections.singleton(roleRepository.findRoleByName("ROLE_ADMIN")));
-//		userService.saveUser(user1);
-//
-//		User user2 = new User();
-//		user2.setUsername("user");
-//		user2.setAge(23);
-//		user2.setEmail("user@mail.ru");
-//		user2.setPassword(bcryptpasswordEncoder.encode("user"));
-//		user2.setRoles(Collections.singleton(roleRepository.findRoleByName("ROLE_USER")));
-//		userService.saveUser(user2);
-//	}
+//    @PostConstruct
+//    public void initServiceImpl() {
+//        User user = new User();
+//        User user1 = new User();
+//            Role adminRole = new Role(1L, "ROLE_ADMIN");
+//            Role userRole = new Role(2L, "ROLE_USER");
+//            roleService.addRole(adminRole);
+//            roleService.addRole(userRole);
+//            user.setUsername("admin");
+//            user1.setUsername("user");
+//            user.setPassword(bcryptpasswordEncoder.encode("admin"));
+//            user1.setPassword(bcryptpasswordEncoder.encode("user"));
+//            user.setAge(25);
+//            user1.setAge(65);
+//            user.setEmail("admin@mail.ru");
+//            user1.setEmail("user@mail.ru");
+//            Set<Role> roles = new HashSet<>();
+//            roles.add(roleRepository.findRoleByName("ROLE_ADMIN"));
+//            Set<Role> roles1 = new HashSet<>();
+//            roles1.add(roleRepository.findRoleByName("ROLE_USER"));
+//            user.setRoles(roles);
+//            user1.setRoles(roles1);
+//            userService.saveUser(user);
+//            userService.saveUser(user1);
+//    }
 
 }

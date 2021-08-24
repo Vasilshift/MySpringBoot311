@@ -1,6 +1,6 @@
-package web.service;//package com.example.rest.service;
+//package web.service;//package com.example.rest.service;
 //
-//public interface DBInitialization {
+//public interface DBInit {
 //
 //    void init();
 //

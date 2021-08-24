@@ -5,4 +5,6 @@ import web.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long>  {
     Role findRoleByName(String name);
+
+
 }

@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col vh-100"></div>
         <div class="col vh-100" style="background-color: white; text-align: center; font-weight: bold" >
-            <form th:method="POST" th:action="@{/api/users}">
+            <form th:method="POST" th:action="@{/api/users}" th:object="${user}">
                 <br>
                 <div class="form-group">
                     <label for="exampleInputName1">username</label>
@@ -27,22 +27,27 @@
                     <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Enter password">
                 </div>
 
-                <div class="form-group">
-                    <div>
-                        <label for="roles">Roles</label>
-                    </div>
-                    <select multiple size="2" id="roles" name="roles" style="width:100%">
-                        <option th:each="role : ${allRoles}"
-                                th:text="${role.name}"
-                                th:value="${role.id}">
-                        </option>
-                    </select>
+                <div>
+
+                    <label>
+                        <input type="checkbox"
+                               name="roleView"
+                               th:value = "ROLE_ADMIN"
+                               th:text="Admin">
+                    </label>
+
+                    <label>
+                        <input type="checkbox"
+                               name="roleView"
+                               th:value = "ROLE_USER"
+                               th:text="User">
+                    </label>
                 </div>
                 <br/>
-                <div class="form-group">
-                    <input type="submit" class="form-control" value="Add new user" style="background-color: #37ab60; color: white;">
-                </div>
-            </form><br>
+                <button type="submit"
+                        class="btn btn-success mb-2 addBtn">Add new user
+                </button>
+            </form>
         </div>
         <div class="col vh-100"></div>
     </div>

@@ -33,6 +33,8 @@ public class AdminController {
         return "index";
     }
 
+
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String findAll(){
 //        List<User> users = userService.findAll();
