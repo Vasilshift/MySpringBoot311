@@ -3,7 +3,7 @@ const modalEditUser = GM.modal({
     title: 'Edit user',
     closable: true,
     content: `
-        <div>gagadf</div>
+        <div>Lorem ipsum dolor sit amet, consectetur.</div>
         
     
 

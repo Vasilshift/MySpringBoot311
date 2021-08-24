@@ -72,6 +72,9 @@ GM.modal = function (options) {
             $modal.parentNode.removeChild($modal)
             $modal.removeEventListener('click', listener)
             //destroyed = true
+        },
+        setContent(html) {
+            $modal.querySelector('[data-content]').innerHTML = html
         }
     })
 }
