@@ -1,9 +1,24 @@
 
-const modal = GM.modal({
-    title: 'my window',
+const modalEditUser = GM.modal({
+    title: 'Edit user',
     closable: true,
     content: `
-    <h4>Model is working</h4>
-    <p>Lorem ipsum dolor sit.</p>`,
-    with: '400px'
+        <div>gagadf</div>
+        
+    
+
+
+    `,
+    with: '400px',
+    footerButtons: [
+        {text: 'Close', type: 'primary', handler() {
+                console.log('Primary btn clicked')
+                modalEditUser.close()
+            }},
+        {text: 'Edit', type: 'danger', handler() {
+                console.log('Danger btn clicked')
+                modalEditUser.close()
+            }}
+    ]
 })
+
