@@ -28,20 +28,13 @@
                 </div>
 
                 <div>
-
-                    <label>
-                        <input type="checkbox"
-                               name="roleView"
-                               th:value = "ROLE_ADMIN"
-                               th:text="Admin">
-                    </label>
-
-                    <label>
-                        <input type="checkbox"
-                               name="roleView"
-                               th:value = "ROLE_USER"
-                               th:text="User">
-                    </label>
+                    <label for="selectRoleNew"><b>Role</b></label>
+                    <select multiple size="2" class="form-control"
+                            id="selectRoleNew"
+                            name="role">
+                        <option value="1" name="ROLE_ADMIN">ADMIN</option>
+                        <option value="2" name="ROLE_USER">USER</option>
+                    </select>
                 </div>
                 <br/>
                 <button type="submit"
