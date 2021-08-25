@@ -80,7 +80,7 @@ document.addEventListener('click', event => {
     }
     if (btnType === 'deleteUser') {
         const oneUserfromDB = allUsers.find(f => f.id === id)
-        modalEditUser.setContent(`
+        modalDeleteUser.setContent(`
             <div class="update_body">
                 <div class="update-content">
                     <div class="form-group">
@@ -99,12 +99,16 @@ document.addEventListener('click', event => {
                              </select>             
                     </div>
                 </div>
+                
+                <a href="#" class="btn btn-danger delut" data-btn="deleteUser1">Delete</a>
+                
+                
             </div>
   
 <!--    <input type="submit" value="Update User">-->
 
        `)
-        modalEditUser.open()
+        modalDeleteUser.open()
         console.log('One user from DB: ', oneUserfromDB)
     }
 

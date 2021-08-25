@@ -25,6 +25,7 @@ public class MyRestController {
         this.roleRepository = roleRepository;
     }
 
+
 //    @PostConstruct
 //    public void firstinit() {
 //        DBInitImpl.init();

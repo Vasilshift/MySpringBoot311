@@ -37,7 +37,6 @@ function _createModal(options) {
                 <div class="modal-body" data-content>
                 ${options.content || ''}
                 </div>
-
             </div>
         </div>
     `)
@@ -57,6 +56,9 @@ GM.modal = function (options) {
         },
         close() {
             $modal.classList.remove('open')
+        },
+        deleteUser() {
+
         }
     }
     const listener = event => {

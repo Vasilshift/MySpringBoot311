@@ -5,7 +5,7 @@ const modalEditUser = GM.modal({
     content: `     
   
     `,
-    with: '400px',
+    width: '400px',
     footerButtons: [
         {text: 'Close', type: 'primary', handler() {
                 console.log('Primary btn clicked')
@@ -24,15 +24,76 @@ const modalDeleteUser = GM.modal({
     content: `     
   
     `,
-    with: '400px',
+    width: '400px',
     footerButtons: [
         {text: 'Close', type: 'primary', handler() {
                 console.log('Primary btn clicked')
-                modalEditUser.close()
+                modalDeleteUser.close()
             }},
         {text: 'Delete', type: 'danger', handler() {
                 console.log('DELETE user btn clicked')
-                modalEditUser.deleteUser()
+                modalDeleteUser.deleteUser()
             }}
     ]
 })
+
+const sendData = (url, data, method) => {
+    const response = fetch(url, {
+        method : method,
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        body: data,
+    })
+        .then(data => {
+            if (!data.ok){
+                throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response.status}`);
+            }
+            return data.json();
+        })
+}
+
+$(document).ready(function (e){  //update user
+    $(".delut").click(function (){
+        let roles = $("#roles").val();
+        const data = {
+            "id": $("#id").val(),
+            "name": $("#name").val(),
+            "age": $("#age").val(),
+            "email": $("#email").val(),
+            "password": $("#password").val(),
+            "roles": getRol(roles)
+        }
+        sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT");
+        $(".update").hide();
+        //getTable();
+    })
+})
+
+function getRol(rol){
+    if (rol.length === 2) {
+        const roles = [{
+            id: 1,
+            name: "ROLE_USER",
+        },
+            {
+                id: 2,
+                name: "ROLE_ADMIN"
+            }]
+        return roles;
+    }
+    if (rol.indexOf("USER") != -1){
+        const roles = [{
+            id: 1,
+            name: "ROLE_USER",
+        }]
+        return roles;
+    }
+    if (rol.indexOf("ADMIN") != -1){
+        const roles = [{
+            id: 1,
+            name: "ROLE_ADMIN",
+        }]
+        return roles;
+    }
+}
