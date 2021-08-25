@@ -53,17 +53,13 @@ public class MyRestController {
 
     @PutMapping("/users")
     public ResponseEntity<User> update(@RequestBody User user){
-        //roleService.setupRoles(user);
+        roleService.setupRoles(user);
         userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping("/users/{id}")
     public void delete(@PathVariable("id") Long id) {
-//        User user = userService.get(id);
-//        if(user == null){
-//            throw new NoSuchUserException("There is no user with id "+ id);
-//        }
         userService.deleteById(id);
     }
 
