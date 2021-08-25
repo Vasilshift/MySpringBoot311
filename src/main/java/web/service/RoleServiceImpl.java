@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.Role;
+import web.model.User;
 import web.repository.RoleRepository;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,4 +49,15 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.save(role);
     }
 
+    @Override
+    public void setupRoles(User user){
+        Set<Role> rolesSet = new HashSet<>();
+
+        if (user.getRoles().contains(roleRepository.findRoleByName("ROLE_ADMIN"))) {
+            rolesSet.add(roleRepository.findRoleByName("ROLE_ADMIN"));
+        }
+        if (user.getRoles().contains(roleRepository.findRoleByName("ROLE_USER"))) {
+            rolesSet.add(roleRepository.findRoleByName("ROLE_USER"));
+        }
+    }
 }

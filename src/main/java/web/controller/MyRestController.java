@@ -5,10 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
+import web.repository.RoleRepository;
 import web.service.RoleService;
 import web.service.UserService;
-
-import javax.annotation.PostConstruct;
 
 
 @RestController
@@ -17,11 +16,13 @@ public class MyRestController {
 
     private final UserService userService;
     private final RoleService roleService;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public MyRestController(UserService userService, RoleService roleService) {
+    public MyRestController(UserService userService, RoleService roleService, RoleRepository roleRepository) {
         this.userService = userService;
         this.roleService = roleService;
+        this.roleRepository = roleRepository;
     }
 
 //    @PostConstruct
@@ -44,9 +45,10 @@ public class MyRestController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> add(@RequestBody User user,  @RequestParam("roleView") String[] roleView){
-        roleService.updateRoles(roleView);
-        userService.addRolesToUser(user, roleView);
+    public ResponseEntity<User> add(@RequestBody User user){
+        //roleService.updateRoles(roleRepository.findRoleByName(roleView));
+        //userService.addRolesToUser(user, roleView);
+        roleService.setupRoles(user);
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
