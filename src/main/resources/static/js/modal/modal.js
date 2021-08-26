@@ -57,9 +57,13 @@ GM.modal = function (options) {
         close() {
             $modal.classList.remove('open')
         },
-        deleteUser() {
+        deleteUserFromDB( url, method) {
+            return fetch(url, {
+                method : method
+            })
 
         }
+
     }
     const listener = event => {
         console.log('Clicked', event.target.dataset.close)

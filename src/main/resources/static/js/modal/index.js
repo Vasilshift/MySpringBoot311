@@ -32,7 +32,7 @@ const modalDeleteUser = GM.modal({
             }},
         {text: 'Delete', type: 'danger', handler() {
                 console.log('DELETE user btn clicked')
-                modalDeleteUser.deleteUser()
+                modalDeleteUser.deleteUserTest().then(r => console.log("method worked"))
             }}
     ]
 })
@@ -53,22 +53,22 @@ const sendData = (url, data, method) => {
         })
 }
 
-$(document).ready(function (e){  //update user
-    $(".delut").click(function (){
-        let roles = $("#roles").val();
-        const data = {
-            "id": $("#id").val(),
-            "name": $("#name").val(),
-            "age": $("#age").val(),
-            "email": $("#email").val(),
-            "password": $("#password").val(),
-            "roles": getRol(roles)
-        }
-        sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT");
-        $(".update").hide();
-        //getTable();
-    })
-})
+// $(document).ready(function (e){  //update user
+//     $(".delut").click(function (){
+//         let roles = $("#roles").val();
+//         const data = {
+//             "id": $("#id").val(),
+//             "name": $("#name").val(),
+//             "age": $("#age").val(),
+//             "email": $("#email").val(),
+//             "password": $("#password").val(),
+//             "roles": getRol(roles)
+//         }
+//         sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT");
+//         $(".update").hide();
+//         //getTable();
+//     })
+// })
 
 function getRol(rol){
     if (rol.length === 2) {
@@ -96,4 +96,31 @@ function getRol(rol){
         }]
         return roles;
     }
+}
+
+function deleteUserTest( url, data, method) {
+    return fetch(url, {
+        method : method,
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        body: data,
+    })
+        .then(data =>  data.json())
+}
+
+
+function restartAllUser() {                                                     //table refreshing
+    let UserTableBody = $(".table-users")
+    UserTableBody.children().remove();
+
+    fetch("api/users")
+        .then((response) => {
+            response.json().then(data => data.forEach(function (item, i, data) {
+                let TableRow = createTableRow(item);
+                UserTableBody.append(TableRow);
+            }));
+        }).catch(error => {
+        console.log(error);
+    });
 }

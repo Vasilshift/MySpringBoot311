@@ -100,7 +100,7 @@ document.addEventListener('click', event => {
                     </div>
                 </div>
                 
-                <a href="#" class="btn btn-danger delut" data-btn="deleteUser1">Delete</a>
+                <a href="#" class="btn btn-danger delut" data-btn="deleteUserFromModal">Delete</a>
                 
                 
             </div>
@@ -110,7 +110,29 @@ document.addEventListener('click', event => {
        `)
         modalDeleteUser.open()
         console.log('One user from DB: ', oneUserfromDB)
-    }
+
+        let idUserToDelete = oneUserfromDB.id
+        console.log('idUserToDelete= ', idUserToDelete)
+
+
+        let urlForDeleteUser = "http://localhost:8080/api/users/" + idUserToDelete
+        // modalDeleteUser.deleteUserTest(urlForDeleteUser, "DELETE")
+
+        $(document).ready(function (e){
+            $(".delut").click(function () {
+                fetch (urlForDeleteUser, {method: "DELETE"})
+                $(".update-users").hide();
+                //createTableUsers()
+                console.log('table users would be renew')
+                modalDeleteUser.close().then(() => restartAllUser())
+                //createTableUsers()
+                //fetch('http://localhost:8080/admin')
+
+            })
+        })
+
+    }   //  end   if (btnType === 'deleteUser')
+
 
 
 
