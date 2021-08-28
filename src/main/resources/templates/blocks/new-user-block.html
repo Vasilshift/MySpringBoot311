@@ -1,5 +1,5 @@
 <div th:fragment="new-user-block">
-<div class="container col-md-4 p-4 text-center">
+<div class="container col-md-4 p-4 text-center editUser">
     <form>
         <div class="form-group text-center">
             <div>
@@ -20,11 +20,18 @@
                        name="password"
                        placeholder="Password"><br>
             </div>
+
+            <div>
+                <label for="emailNew"><b>Password</b></label>
+                <input type="password" class="form-control" id="emailNew"
+                       name="email"
+                       placeholder="email"><br>
+            </div>
+
             <div>
                 <label for="selectRoleNew"><b>Role</b></label>
                 <select multiple size="2" class="form-control"
-                        id="selectRoleNew"
-                        name="role">
+                        id="selectRoleNew" name="role">
                     <option value="1" name="ROLE_ADMIN">ADMIN</option>
                     <option value="2" name="ROLE_USER">USER</option>
                 </select>

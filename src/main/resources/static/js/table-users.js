@@ -86,6 +86,19 @@ function createTableUsers(){
 
 createTableUsers()
 
+let oneUserNewOrRenew = {
+    username: $('#usernameNew'),
+    age: $('#ageNew').val(),
+    email: $('#emailNew').val(),
+    password: $('#passwordNew').val(),
+    roles: getRol("#selectRoleNew")
+}
+
+
+
+
+
+
 document.addEventListener('click', event => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
@@ -96,60 +109,61 @@ document.addEventListener('click', event => {
             <div class="update_body">
                 <div class="update-content">
                     <div class="form-group">
+                    
                         <label for="id">ID</label>
-                        <input readonly type="number" th:field="*{id}" id="id" placeholder="${id}">
-                        <label for="firstName">Username</label>
-                        <input type="text" th:field="*{username}" id="firstName" placeholder="${oneUserfromDB.username}">
-                        <label for="age">Age</label>
-                        <input type="number" th:field="*{age}" id="age" placeholder="${oneUserfromDB.age}">
-                        <label for="email">Email</label>
-                        <input type="text" th:field="*{email}" id="email" placeholder="${oneUserfromDB.email}">
-                        <label for="selectRoleEd"><b>Role</b></label>
-                             <select multiple size="2" class="form-control" id="selectRoleEd" name="role">
+                        <input readonly type="number" id="id" placeholder="${id}">
+                        
+                        <label for="passwordEdit"><b>Password</b></label>
+                        <input type="text" class="form-control" id="passwordEdit" name="password"><br>
+                        
+                        <label for="usernameEdit"><b>Username</b></label>
+                        <input type="text" class="form-control" id="usernameEdit" name="username"><br>
+                                               
+                        <label for="ageEdit"><b>Age</b></label>
+                        <input type="number" class="form-control" id="ageEdit" name="age" ><br>                                                                 
+            
+                        <label for="emailEdit"><b>Password</b></label>
+                        <input type="password" class="form-control" id="emailEdit" name="email"><br>
+                                    
+                        <label for="selectRoleEdit"><b>Role</b></label>
+                             <select multiple size="2" class="form-control" id="selectRoleEdit" name="Role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
                                 <option value="2" name="ROLE_USER">USER</option>
                              </select>             
                     </div>                   
                 <div>       
                     <a href="#" class="btn btn-primary close-btn">Close</a>
-                    <a href="#" class="btn btn-danger edit1" id="edituser">Edit</a>
+                    <a href="#" class="btn btn-danger edit1" id="editusered">Edit</a>
                 </div>                                            
                 </div>
             </div>
        `)
         modalEditUser.open()
-        console.log('One user from DB: ', oneUserfromDB)
 
-        let oneUserfromDBforRenew = {
-            username: $('#usernameNew').val(),
-            age: $('#ageNew').val(),
-            email: $('#emailNew').val(),
-            password: $('#passwordNew').val(),
-            roles: getRol("#selectRoleNew")
-        }
 
-        let string_of_oneUserfromDBforRenew = JSON.stringify(oneUserfromDBforRenew)
-        console.log('obx: ', string_of_oneUserfromDBforRenew)
 
-        $("#edituser").click(function () {
+        console.log('oneUserNewOrRenew: ', oneUserNewOrRenew)
+
+        $("#editusered").click(function () {
 
                 fetch(requrl, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json;charset=utf-8"
                     },
-                    body: JSON.stringify(oneUserfromDBforRenew)
-                }).then(res => res.json())
+                    body: JSON.stringify(oneUserNewOrRenew)
+                }).then(function (response) {
+                    $('input').val('');
+                    $('.editUser #editModal').modal('hide');
+                    //restartAllUser();
+                })
             modalDeleteUser.close()
-
 
             //restartAllUser()
         })
 
         console.log('One user would be renew')
         //modalDeleteUser.editModalButton(oneUserfromDB)
-
-
 
     }
 
