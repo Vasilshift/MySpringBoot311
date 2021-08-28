@@ -1,0 +1,110 @@
+
+.div-header {
+    background: black;
+    color: white;
+}
+.div-left-header span{
+    font-size: 22px;
+    padding: 3% 0%;
+}
+
+.div-right-header {
+    text-align: right;
+    color: #ffffff;
+}
+.div-right-header a{
+    text-decoration: none;
+    color: #989ca1;
+    padding: 1%;
+}
+
+.div-left-body {
+    padding: 0%;
+}
+
+.div-admin-user {
+    padding: 0;
+    margin: 12% 0%;
+}
+
+.div-admin-user button{
+    width: 100%;
+    text-align: left;
+    box-shadow: none;
+    outline: none;
+}
+.div-admin-user button:active{
+    box-shadow: none;
+    outline: none;
+}
+.div-admin-user button:hover{
+    box-shadow: none;
+    outline: none;
+}
+.div-admin-user button:visited{
+    box-shadow: none;
+    outline: none;
+}
+
+.div-right-body {
+    background: #f2f2f2;
+}
+
+.admin-panel {
+    margin: 2% 0% 0%;;
+}
+
+.nav-panel {
+    padding: 0;
+}
+
+.all-users {
+    border: solid 1px #e3e3e3;
+    border-radius: 5px;
+}
+
+.table-panel {
+    background: white;
+    border: solid 1px #e3e3e3;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+
+
+.update {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    display: none
+}
+
+.update-body {
+    position: absolute;
+    background: white;
+    width: 35%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+}
+.update-head-left{
+    margin: 0px 5%;
+
+}
+.update-head-right{
+    margin: 2% 3% 0%;
+
+}
+.update-content{
+    padding: 10% 20%;
+    text-align: center;
+    font-weight: bold;
+    border-top: solid 1px #e3e3e3;
+    border-bottom: solid 1px #e3e3e3;
+}
+
+.update-down{
+    padding: 3%;
+}

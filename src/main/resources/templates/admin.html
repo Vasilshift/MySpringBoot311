@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Table</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<header>
+    <div class="container-fluid div-header">
+        <div class="row">
+            <div class="col div-left-header" th:each="user: ${user}">
+                <span th:text="${user.getEmail()}" style="font-weight: bold;"></span>
+                <span> with roles:</span>
+                <span th:text="${user.getNameRole()}"></span>
+            </div>
+            <div class="col div-right-header">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid vh-100">
+    <div class="row">
+        <div class="col-2 vh-100 div-left-body"></div>
+        <div class="col-10 vh-100 div-right-body"></div>
+    </div>
+
+    <div class="container-fluid vh-100 update"></div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/all-users.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
+<script type="text/javascript" src="js/user-new.js"></script>
+<script type="text/javascript" src="js/user-update.js"></script>
+<script type="text/javascript" src="js/user-delete.js"></script>
+
+
+</body>
+</html>

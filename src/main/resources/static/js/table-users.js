@@ -139,7 +139,7 @@ document.addEventListener('click', event => {
                 </div>   
                 <div>       
                     <a href="#" class="btn btn-primary close-btn" data-btn="deleteUserFromModal">Close</a>
-                    <a href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal">Delete</a>
+                    <a href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</a>
                 </div>           
             </div>
        `)
@@ -148,34 +148,31 @@ document.addEventListener('click', event => {
 
         let idUserToDelete = oneUserfromDB.id
         console.log('idUserToDelete= ', idUserToDelete)
-
         let urlForDeleteUser = "http://localhost:8080/api/users/" + idUserToDelete
 
-        $(document).ready(function (e){
-            $(".delut").click(function () {
+
+            $("#deluser").click(function () {
                 fetch (urlForDeleteUser, {
                     method: "DELETE",
                     headers: {"Content-Type": "application/json; charset=UTF-8"}})
                 console.log('table users would be renew')
-                modalDeleteUser.close()
-
-            })
-
-        })
-        $('.delut1').render()
-
-
-
-
-        $(document).ready(function (e){
-            $('.close-btn').click(function () {
+                fetch ('http://localhost:8080/api/users', {
+                    method: "GET",
+                    headers: {"Content-Type": "application/json; charset=UTF-8"}})
+                console.log('table users would be renew')
                 modalDeleteUser.close()
             })
-        })
 
+        $(".delut1").click(function () {
+            createTableUsers()
+        })
+        
+
+        //getUsers()
 
 
     }   //  end   if (btnType === 'deleteUser')
+
 
 })
 
