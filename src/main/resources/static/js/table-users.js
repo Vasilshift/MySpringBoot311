@@ -20,8 +20,6 @@ fetch('http://localhost:8080/api/users')
     .then(data => allUsers = data)
     .then(() => console.log(allUsers))
 
-
-
 function render() {
     const toHTML = u => `<div><tr>
                       <td>${u.id}</td>
@@ -35,7 +33,29 @@ function render() {
                      </div> 
                      `
     const htmlRendered = allUsers.map(toHTML).join('')
-    document.querySelector('.table-users-object').innerHTML = htmlRendered
+    a.innerHTML = htmlRendered
+}
+
+function getUsers() {
+    fetch('http://localhost:8080/api/users')
+        .then(res => res.json())
+        .then(result  => {
+            if (result.length > 0 ) {
+                let body = ""
+                result.forEach(u => {
+                    body += "<tr>"
+                    body += '<td>' + u.id + '</td>'
+                    body += '<td>' + u.username + '</td>'
+                    body += "<td>" + u.age + "</td>"
+                    body += "<td>" + u.email + "</td>"
+                    body += "<td>" + rol(u) + "</td>"
+                    body += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
+                    body += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
+
+                })
+                document.querySelector(".table-users-object").innerHTML = body
+            }
+        })
 }
 
 
@@ -116,10 +136,11 @@ document.addEventListener('click', event => {
                                 <option value="2" name="ROLE_USER">USER</option>
                              </select>             
                     </div>
-                </div>
-            
-                <a href="#" class="btn btn-danger delut" data-btn="deleteUserFromModal">Delete</a>
-                
+                </div>   
+                <div>       
+                    <a href="#" class="btn btn-primary close-btn" data-btn="deleteUserFromModal">Close</a>
+                    <a href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal">Delete</a>
+                </div>           
             </div>
        `)
         modalDeleteUser.open()
@@ -129,19 +150,29 @@ document.addEventListener('click', event => {
         console.log('idUserToDelete= ', idUserToDelete)
 
         let urlForDeleteUser = "http://localhost:8080/api/users/" + idUserToDelete
-        // modalDeleteUser.deleteUserTest(urlForDeleteUser, "DELETE")
 
         $(document).ready(function (e){
             $(".delut").click(function () {
-                fetch (urlForDeleteUser, {method: "DELETE"})
-
+                fetch (urlForDeleteUser, {
+                    method: "DELETE",
+                    headers: {"Content-Type": "application/json; charset=UTF-8"}})
                 console.log('table users would be renew')
                 modalDeleteUser.close()
-                modalDeleteUser.render()
 
             })
 
         })
+        $('.delut1').render()
+
+
+
+
+        $(document).ready(function (e){
+            $('.close-btn').click(function () {
+                modalDeleteUser.close()
+            })
+        })
+
 
 
     }   //  end   if (btnType === 'deleteUser')
