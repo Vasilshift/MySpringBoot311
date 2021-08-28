@@ -13,7 +13,7 @@ const modalEditUser = GM.modal({
             }},
         {text: 'Edit', type: 'danger', handler() {
                 console.log('EDIT user btn clicked')
-                modalEditUser.saveUser()
+                modalEditUser.editUser()
             }}
     ]
 })

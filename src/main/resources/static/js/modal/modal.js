@@ -57,12 +57,6 @@ GM.modal = function (options) {
         close() {
             $modal.classList.remove('open')
         },
-        deleteUserFromDB( url, method) {
-            return fetch(url, {
-                method : method
-            })
-
-        },
         render(u) {
             const toHTML = u => `<div><tr>
                       <td>${u.id}</td>
@@ -77,6 +71,19 @@ GM.modal = function (options) {
                      `
             const htmlRendered = allUsers.map(toHTML).join('')
             document.querySelector('.table-users-object').innerHTML = htmlRendered
+        },
+        editModalButton(user) {
+            fetch("api/users", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8"
+                },
+            body: JSON.stringify(user)
+            }).then(function (response) {
+                $('input').val('')
+                $('.editUserpp')
+                //restartAllUser()
+            })
         }
 
     }

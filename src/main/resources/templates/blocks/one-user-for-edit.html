@@ -1,0 +1,80 @@
+<div th:fragment="one-user-for-edit">
+<div class="editUser">
+    <div class="modal fade" id="editModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"> Edit user</h3>
+                    <button class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container col-md-6 text-center">
+                        <div class="row">
+                            <form>
+                                <div class="form-group text-center">
+                                    <div>
+                                        <label for="idEd"><b>ID</b></label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="idEd" name="id" readonly>
+                                    </div>
+                                    <div>
+                                        <label for="nameEd"><b>First name</b></label>
+                                        <input type="text" value=""
+                                               class="form-control"
+                                               id="nameEd" name="name">
+                                    </div>
+                                    <div>
+                                        <label for="lastnameEd"><b>Last name</b></label>
+                                        <input type="text" value=""
+                                               class="form-control"
+                                               id="lastnameEd" name="lastname">
+                                    </div>
+                                    <div>
+                                        <label for="ageEd"><b>Age</b></label>
+                                        <input type="number" value=""
+                                               class="form-control"
+                                               id="ageEd" name="age">
+                                    </div>
+                                    <div>
+                                        <label for="workEd"><b>Work</b></label>
+                                        <input type="text" value=""
+                                               class="form-control"
+                                               id="workEd" name="work">
+                                    </div>
+                                    <div>
+                                        <label for="usernameEd"><b>Username</b></label>
+                                        <input type="text" class="form-control"
+                                               id="usernameEd" name="username">
+                                    </div>
+                                    <div>
+                                        <label for="passwordEd"><b>Password</b></label>
+                                        <input type="password" class="form-control"
+                                               id="passwordEd" name="password">
+                                    </div>
+                                    <div>
+                                        <label for="selectRoleEd"><b>Role</b></label>
+                                        <select multiple size="2" class="form-control"
+                                                id="selectRoleEd"
+                                                name="role">
+                                            <option value="1" name="ROLE_ADMIN">ADMIN</option>
+                                            <option value="2" name="ROLE_USER">USER</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-dismiss="modal">Close
+                        </button>
+                        <button type="submit" class="btn btn-primary editBtn" id="submitEdit">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
