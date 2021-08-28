@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping()
 public class AdminController {
 
     private final UserService userService;
