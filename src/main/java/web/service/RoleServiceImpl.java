@@ -32,4 +32,9 @@ public class RoleServiceImpl implements RoleService {
         return roleList;
     }
 
+    @Override
+    public void addRole(Role role) {
+        roleRepository.save(role);
+    }
+
 }
