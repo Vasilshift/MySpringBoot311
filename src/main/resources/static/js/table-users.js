@@ -134,11 +134,12 @@ document.addEventListener('click', event => {
                              <select multiple size="2" class="form-control" id="selectRoleEd" name="role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
                                 <option value="2" name="ROLE_USER">USER</option>
-                             </select>             
+                             </select>                       
+                   
                     </div>
                 </div>   
                 <div>       
-                    <a href="#" class="btn btn-primary close-btn" data-btn="deleteUserFromModal">Close</a>
+                    <a href="#" class="btn btn-primary close-btn" data-btn="closeUserFromModal">Close</a>
                     <a href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</a>
                 </div>           
             </div>
@@ -150,26 +151,23 @@ document.addEventListener('click', event => {
         console.log('idUserToDelete= ', idUserToDelete)
         let urlForDeleteUser = "http://localhost:8080/api/users/" + idUserToDelete
 
-
-            $("#deluser").click(function () {
-                fetch (urlForDeleteUser, {
-                    method: "DELETE",
-                    headers: {"Content-Type": "application/json; charset=UTF-8"}})
+        $("#deluser").click(function () {
+            fetch (urlForDeleteUser, {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json; charset=UTF-8"}})
                 console.log('table users would be renew')
-                fetch ('http://localhost:8080/api/users', {
-                    method: "GET",
-                    headers: {"Content-Type": "application/json; charset=UTF-8"}})
+            fetch ('http://localhost:8080/api/users', {
+                method: "GET",
+                headers: {"Content-Type": "application/json; charset=UTF-8"}})
                 console.log('table users would be renew')
                 modalDeleteUser.close()
             })
-
         $(".delut1").click(function () {
             createTableUsers()
         })
-        
-
-        //getUsers()
-
+        $('.close-btn').click(function () {
+            modalDeleteUser.close()
+        })
 
     }   //  end   if (btnType === 'deleteUser')
 

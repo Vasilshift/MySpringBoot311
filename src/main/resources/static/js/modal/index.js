@@ -25,16 +25,16 @@ const modalDeleteUser = GM.modal({
   
     `,
     width: '400px',
-    footerButtons: [
-        {text: 'Close', type: 'primary', handler() {
-                console.log('Primary btn clicked')
-                modalDeleteUser.close()
-            }},
-        {text: 'Delete', type: 'danger', handler() {
-                console.log('DELETE user btn clicked')
-                modalDeleteUser.deleteUserTest().then(r => console.log("method worked"))
-            }}
-    ]
+    // footerButtons: [
+    //     {text: 'Close', type: 'primary', handler() {
+    //             console.log('Primary btn clicked')
+    //             modalDeleteUser.close()
+    //         }},
+    //     {text: 'Delete', type: 'danger', handler() {
+    //             console.log('DELETE user btn clicked')
+    //             modalDeleteUser.deleteUserTest().then(r => console.log("method worked"))
+    //         }}
+    // ]
 })
 
 const sendData = (url, data, method) => {
