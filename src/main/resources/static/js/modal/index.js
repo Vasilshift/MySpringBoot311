@@ -110,17 +110,17 @@ function deleteUserTest( url, data, method) {
 }
 
 
-function restartAllUser() {                                                     //table refreshing
-    let UserTableBody = $(".table-users")
-    UserTableBody.children().remove();
-
-    fetch("api/users")
-        .then((response) => {
-            response.json().then(data => data.forEach(function (item, i, data) {
-                let TableRow = createTableRow(item);
-                UserTableBody.append(TableRow);
-            }));
-        }).catch(error => {
-        console.log(error);
-    });
-}
+// function restartAllUser() {                                                     //table refreshing
+//     let UserTableBody = $(".table-users")
+//     UserTableBody.children().remove();
+//
+//     fetch("http://localhost:8080/api/users/")
+//         .then((response) => {
+//             response.json().then(data => data.forEach(function (item, i, data) {
+//                 let TableRow = createTableRow(item);
+//                 UserTableBody.append(TableRow);
+//             }));
+//         }).catch(error => {
+//         console.log(error);
+//     });
+// }

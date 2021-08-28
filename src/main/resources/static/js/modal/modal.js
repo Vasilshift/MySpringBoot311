@@ -62,6 +62,21 @@ GM.modal = function (options) {
                 method : method
             })
 
+        },
+        render(u) {
+            const toHTML = u => `<div><tr>
+                      <td>${u.id}</td>
+                      <td>${u.username}</td>
+                      <td>${u.age}</td>
+                      <td>${u.email}</td>
+                      <td>${rol(u)}</td>
+                      <td><a href="#" class="btn btn-primary" data-btn="editUser" data-id=${u.id}>Edit</a></td>
+                      <td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id=${u.id}>Delete</a></td>
+                      </tr>
+                     </div> 
+                     `
+            const htmlRendered = allUsers.map(toHTML).join('')
+            document.querySelector('.table-users-object').innerHTML = htmlRendered
         }
 
     }

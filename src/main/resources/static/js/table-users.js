@@ -21,6 +21,24 @@ fetch('http://localhost:8080/api/users')
     .then(() => console.log(allUsers))
 
 
+
+function render() {
+    const toHTML = u => `<div><tr>
+                      <td>${u.id}</td>
+                      <td>${u.username}</td>
+                      <td>${u.age}</td>
+                      <td>${u.email}</td>
+                      <td>${rol(u)}</td>
+                      <td><a href="#" class="btn btn-primary" data-btn="editUser" data-id=${u.id}>Edit</a></td>
+                      <td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id=${u.id}>Delete</a></td>
+                      </tr>
+                     </div> 
+                     `
+    const htmlRendered = allUsers.map(toHTML).join('')
+    document.querySelector('.table-users-object').innerHTML = htmlRendered
+}
+
+
 function createTableUsers(){
     return (
         fetch(requrl).then(
@@ -99,14 +117,10 @@ document.addEventListener('click', event => {
                              </select>             
                     </div>
                 </div>
-                
+            
                 <a href="#" class="btn btn-danger delut" data-btn="deleteUserFromModal">Delete</a>
                 
-                
             </div>
-  
-<!--    <input type="submit" value="Update User">-->
-
        `)
         modalDeleteUser.open()
         console.log('One user from DB: ', oneUserfromDB)
@@ -114,27 +128,23 @@ document.addEventListener('click', event => {
         let idUserToDelete = oneUserfromDB.id
         console.log('idUserToDelete= ', idUserToDelete)
 
-
         let urlForDeleteUser = "http://localhost:8080/api/users/" + idUserToDelete
         // modalDeleteUser.deleteUserTest(urlForDeleteUser, "DELETE")
 
         $(document).ready(function (e){
             $(".delut").click(function () {
                 fetch (urlForDeleteUser, {method: "DELETE"})
-                $(".update-users").hide();
-                //createTableUsers()
+
                 console.log('table users would be renew')
-                modalDeleteUser.close().then(() => restartAllUser())
-                //createTableUsers()
-                //fetch('http://localhost:8080/admin')
+                modalDeleteUser.close()
+                modalDeleteUser.render()
 
             })
+
         })
 
+
     }   //  end   if (btnType === 'deleteUser')
-
-
-
 
 })
 
