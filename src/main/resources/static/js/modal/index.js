@@ -73,26 +73,21 @@ const sendData = (url, data, method) => {
 function getRol(rol){
     if (rol.length === 2) {
         const roles = [{
-            id: 2,
-            name: "ROLE_USER",
+            id: 2, name: "ROLE_USER",
         },
-            {
-                id: 1,
-                name: "ROLE_ADMIN"
+            { id: 1, name: "ROLE_ADMIN"
             }]
         return roles;
     }
     if (rol.indexOf("USER")){
         const roles = [{
-            id: 2,
-            name: "ROLE_USER"
+            id: 2, name: "ROLE_USER"
         }]
         return roles;
     }
     if (rol.indexOf("ADMIN")){
         const roles = [{
-            id: 1,
-            name: "ROLE_ADMIN"
+            id: 1, name: "ROLE_ADMIN"
         }]
         return roles;
     }
