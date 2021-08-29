@@ -86,8 +86,6 @@ function createTableUsers(){
 
 createTableUsers()
 
-//document.addEventListener('click', )
-
 document.addEventListener('click', event => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
@@ -96,14 +94,6 @@ document.addEventListener('click', event => {
         const oneUserfromDB = allUsers.find(f => f.id === id)
         modalEditUser.setContent(`
            <div class="update-body">
-                <div class="row update-head">
-                    <div class="col update-head-left">
-                        <h3>Edit user</h3>
-                    </div>
-                    <div class="col update-head-right" style="text-align: right">
-                        <button type="button" class="btn-close update-close" aria-label="Close"></button>
-                    </div>
-                </div>
                 <div class="update-content">
                     <div class="form-group">
                         <label for="id">ID</label>
@@ -122,15 +112,14 @@ document.addEventListener('click', event => {
                         <input class="form-control update-password" type="password" name="passwordEdit" id="password">
     
                         <label for="roles">Enter role: </label>
-                        <select class="form-control" size="2" name="roles" id="rolesEdit">
+                        <select class="form-control" multiple="multiple" size="2" name="roles" id="rolesEdit">
                             <option>USER</option>
                             <option>ADMIN</option>
                         </select>
                     </div>
                 </div>
-
-                <div class="update-down">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
                         <button class="btn btn-secondary me-md-2 update-close close-btn" type="button">Close</button>
                         <button class="btn btn-primary update-edit" type="submit">Edit</button>
                     </div>
@@ -140,7 +129,6 @@ document.addEventListener('click', event => {
        `)
         modalEditUser.open()
         console.log('One user from DB: ', oneUserfromDB)
-
         $(document).on("click", ".update-edit", function (){
             //let roles = $("#rolesEdit").val();
             const data = {
@@ -186,9 +174,11 @@ document.addEventListener('click', event => {
                              </select>                       
                     </div>
                 </div>   
-                <div>       
-                    <a href="#" class="btn btn-primary close-btn" data-btn="closeUserFromModal">Close</a>
-                    <a href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</a>
+                <div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">       
+                        <button href="#" class="btn btn-secondary me-md-2 close-btn" data-btn="closeUserFromModal">Close</button>
+                        <button href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</button>
+                    </div>    
                 </div>           
             </div>
        `)

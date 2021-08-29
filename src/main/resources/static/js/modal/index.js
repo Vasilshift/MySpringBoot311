@@ -6,16 +6,16 @@ const modalEditUser = GM.modal({
   
     `,
     width: '400px',
-    footerButtons: [
-        {text: 'Close', type: 'primary', handler() {
-                console.log('Primary btn clicked')
-                modalEditUser.close()
-            }},
-        {text: 'Edit', type: 'danger', handler() {
-                console.log('EDIT user btn clicked')
-                modalEditUser.saveUser()
-            }}
-    ]
+    // footerButtons: [
+    //     {text: 'Close', type: 'primary', handler() {
+    //             console.log('Primary btn clicked')
+    //             modalEditUser.close()
+    //         }},
+    //     {text: 'Edit', type: 'danger', handler() {
+    //             console.log('EDIT user btn clicked')
+    //             modalEditUser.saveUser()
+    //         }}
+    // ]
 })
 
 const modalDeleteUser = GM.modal({
@@ -73,7 +73,7 @@ const sendData = (url, data, method) => {
 function getRol(rol){
     if (rol.length === 2) {
         const roles = [{
-            id: 2, name: "ROLE_USER",
+            id: 2, name: "ROLE_USER"
         },
             { id: 1, name: "ROLE_ADMIN"
             }]
