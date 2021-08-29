@@ -1,4 +1,3 @@
-//realize modal window : display and close
 Element.prototype.appendAfter = function (element) {
     element.parentNode.insertBefore(this, element.nextSibling)
 }
@@ -17,7 +16,6 @@ function _createModalFooter(buttons = []) {
         $btn.classList.add('btn')
         $btn.classList.add(`btn-${btn.type || 'secondary'}`)
         $btn.onclick = btn.handler || noop
-
         wrap.appendChild($btn)
     })
     return wrap
@@ -50,18 +48,12 @@ GM.modal = function (options) {
     const destroyed = false
     const modal = {
         open() {
-            // if (destroyed) {return console.log('Modal is destroyed')
-            // }
+            if (destroyed) {return console.log('Modal is destroyed')
+            }
             $modal.classList.add('open')
         },
         close() {
             $modal.classList.remove('open')
-        },
-        deleteUserFromDB( url, method) {
-            return fetch(url, {
-                method : method
-            })
-
         },
         render() {
             const toHTML = u => `<div><tr>
@@ -78,7 +70,6 @@ GM.modal = function (options) {
             const htmlRendered = allUsers.map(toHTML).join('')
             document.querySelector('.table-users-object').innerHTML = htmlRendered
         }
-
     }
     const listener = event => {
         console.log('Clicked', event.target.dataset.close)

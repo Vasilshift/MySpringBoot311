@@ -1,4 +1,3 @@
-// fetch
 const sendData = (url, data, method) => {
     const response = fetch(url, {
         method : method,
@@ -10,12 +9,10 @@ const sendData = (url, data, method) => {
 
  }
 
-//button close
 $(document).on("click", ".update-close", function () {
     $(".update").hide();
 })
 
-// Roles
 function getRol(rol){
     if (rol.length === 2) {
         const roles = [{

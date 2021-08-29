@@ -3,6 +3,7 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.repository.RoleRepository;
@@ -16,20 +17,14 @@ public class MyRestController {
 
     private final UserService userService;
     private final RoleService roleService;
-    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public MyRestController(UserService userService, RoleService roleService, RoleRepository roleRepository) {
+    public MyRestController(UserService userService, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.roleService = roleService;
-        this.roleRepository = roleRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
-
-
-//    @PostConstruct
-//    public void firstinit() {
-//        DBInitImpl.init();
-//    }
 
     @GetMapping("/users")
     public ResponseEntity<Iterable<User>> GetAllUsers() {
@@ -41,19 +36,20 @@ public class MyRestController {
 
     @GetMapping("/users/{id}")
     public User showUser(@PathVariable("id") Long id) {
-        User user = userService.findById(id);
-        return user;
+        return userService.findById(id);
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> add(@RequestBody User user){
+    public ResponseEntity<User> addUser(@RequestBody User user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         roleService.setupRoles(user);
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/users")
-    public ResponseEntity<User> update(@RequestBody User user){
+    public ResponseEntity<User> updateUser(@RequestBody User user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         roleService.setupRoles(user);
         userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);

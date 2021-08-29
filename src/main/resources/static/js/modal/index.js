@@ -1,40 +1,12 @@
-
 const modalEditUser = GM.modal({
     title: 'Edit user',
     closable: true,
-    content: `     
-  
-    `,
-    width: '400px',
-    // footerButtons: [
-    //     {text: 'Close', type: 'primary', handler() {
-    //             console.log('Primary btn clicked')
-    //             modalEditUser.close()
-    //         }},
-    //     {text: 'Edit', type: 'danger', handler() {
-    //             console.log('EDIT user btn clicked')
-    //             modalEditUser.saveUser()
-    //         }}
-    // ]
+    width: '400px'
 })
 
 const modalDeleteUser = GM.modal({
     title: 'Delete user',
     closable: true,
-    content: `     
-  
-    `,
-    width: '400px',
-    // footerButtons: [
-    //     {text: 'Close', type: 'primary', handler() {
-    //             console.log('Primary btn clicked')
-    //             modalDeleteUser.close()
-    //         }},
-    //     {text: 'Delete', type: 'danger', handler() {
-    //             console.log('DELETE user btn clicked')
-    //             modalDeleteUser.deleteUserTest().then(r => console.log("method worked"))
-    //         }}
-    // ]
 })
 
 const sendData = (url, data, method) => {
@@ -52,23 +24,6 @@ const sendData = (url, data, method) => {
             return data.json();
         })
 }
-
-// $(document).ready(function (e){  //update user
-//     $(".delut").click(function (){
-//         let roles = $("#roles").val();
-//         const data = {
-//             "id": $("#id").val(),
-//             "name": $("#name").val(),
-//             "age": $("#age").val(),
-//             "email": $("#email").val(),
-//             "password": $("#password").val(),
-//             "roles": getRol(roles)
-//         }
-//         sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT");
-//         $(".update").hide();
-//         //getTable();
-//     })
-// })
 
 function getRol(rol){
     if (rol.length === 2) {

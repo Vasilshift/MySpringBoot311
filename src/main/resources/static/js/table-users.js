@@ -205,55 +205,7 @@ document.addEventListener('click', event => {
         $('.close-btn').click(function () {
             modalDeleteUser.close()
         })
-
     }   //  end   if (btnType === 'deleteUser')
-
-    // if (btnType === 'addUserButton') {
-    //     modalEditUser.setContent(`
-    //        <div class="update-body">
-    //             <div class="row update-head">
-    //                 <div class="col update-head-left">
-    //                     <h3>Edit user</h3>
-    //                 </div>
-    //                 <div class="col update-head-right" style="text-align: right">
-    //                     <button type="button" class="btn-close update-close" aria-label="Close"></button>
-    //                 </div>
-    //             </div>
-    //             <div class="update-content">
-    //                 <div class="form-group">
-    //
-    //                     <label for="usernameNew">Enter username: </label>
-    //                     <input class="form-control" type="text" name="username" id="usernameNew" value=""/>
-    //
-    //                     <label for="ageNew">Enter age: </label>
-    //                     <input class="form-control" type="text" name="age" id="ageNew" value=""/>
-    //
-    //                     <label for="emailNew">Enter email: </label>
-    //                     <input class="form-control" type="text" name="email" id="emailNew" value=""/>
-    //
-    //                     <label for="passwordNew">Enter password: </label>
-    //                     <input class="form-control update-password" type="password" name="passwordNew" id="password">
-    //
-    //                     <label for="roles">Enter role: </label>
-    //                     <select class="form-control" size="2" name="roles" id="rolesNew">
-    //                         <option>USER</option>
-    //                         <option>ADMIN</option>
-    //                     </select>
-    //                 </div>
-    //             </div>
-    //
-    //             <div class="update-down">
-    //                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    //                     <button class="btn btn-secondary me-md-2 update-close close-btn" type="button">Close</button>
-    //                     <button class="btn btn-primary update-edit" type="submit">Edit</button>
-    //                 </div>
-    //             </div>
-    //             </div>
-    //         </div>
-    //    `)
-    //     modalEditUser.open()
-    // }
-
 })
 
 
