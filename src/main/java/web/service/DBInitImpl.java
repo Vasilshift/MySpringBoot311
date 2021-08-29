@@ -15,14 +15,12 @@ public class DBInitImpl {
 
     private final RoleRepository roleRepository;
     private final UserService userService;
-    private final RoleService roleService;
-    private BCryptPasswordEncoder bcryptpasswordEncoder;
+    private final BCryptPasswordEncoder bcryptpasswordEncoder;
 
     @Autowired
-    public DBInitImpl(RoleRepository roleRepository, UserService userService, RoleService roleService, BCryptPasswordEncoder bcryptpasswordEncoder) {
+    public DBInitImpl(RoleRepository roleRepository, UserService userService, BCryptPasswordEncoder bcryptpasswordEncoder) {
         this.roleRepository = roleRepository;
         this.userService = userService;
-        this.roleService = roleService;
         this.bcryptpasswordEncoder = bcryptpasswordEncoder;
     }
 
@@ -40,7 +38,6 @@ public class DBInitImpl {
         User user1 = new User();
         user1.setUsername("admin");
         user1.setPassword(bcryptpasswordEncoder.encode("admin"));
-        //user1.setLastname("adminov");
         user1.setAge(34);
         user1.setEmail("admin@mail.ru");
         user1.setRoles(Collections.singleton(roleRepository.findRoleByName("ROLE_ADMIN")));
@@ -49,7 +46,6 @@ public class DBInitImpl {
         User user2 = new User();
         user2.setUsername("user");
         user2.setPassword(bcryptpasswordEncoder.encode("user"));
-        //user2.setLastname("userov");
         user2.setAge(56);
         user2.setEmail("user@mail.ru");
         user2.setRoles(Collections.singleton(roleRepository.findRoleByName("ROLE_USER")));
