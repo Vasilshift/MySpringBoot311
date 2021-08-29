@@ -32,7 +32,7 @@ public class MyRestController {
 //    }
 
     @GetMapping("/users")
-    public ResponseEntity<Iterable<User>> apiGetAllUsers() {
+    public ResponseEntity<Iterable<User>> GetAllUsers() {
         Iterable<User> users = userService.findAll();
         return users != null
                 ? new ResponseEntity<>(users, HttpStatus.OK)

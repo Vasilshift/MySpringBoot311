@@ -63,7 +63,7 @@ GM.modal = function (options) {
             })
 
         },
-        render(u) {
+        render() {
             const toHTML = u => `<div><tr>
                       <td>${u.id}</td>
                       <td>${u.username}</td>

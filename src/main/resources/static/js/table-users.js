@@ -93,28 +93,81 @@ document.addEventListener('click', event => {
     if (btnType === 'editUser') {
         const oneUserfromDB = allUsers.find(f => f.id === id)
         modalEditUser.setContent(`
-            <div class="update_body">
+           <div class="update-body">
+                <div class="row update-head">
+                    <div class="col update-head-left">
+                        <h3>Edit user</h3>
+                    </div>
+                    <div class="col update-head-right" style="text-align: right">
+                        <button type="button" class="btn-close update-close" aria-label="Close"></button>
+                    </div>
+                </div>
                 <div class="update-content">
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input readonly type="number" th:field="*{id}" id="id" placeholder="${id}">
-                        <label for="firstName">Username</label>
-                        <input type="text" th:field="*{username}" id="firstName" placeholder="${oneUserfromDB.username}">
-                        <label for="age">Age</label>
-                        <input type="number" th:field="*{age}" id="age" placeholder="${oneUserfromDB.age}">
-                        <label for="email">Email</label>
-                        <input type="text" th:field="*{email}" id="email" placeholder="${oneUserfromDB.email}">
-                        <label for="selectRoleEd"><b>Role</b></label>
-                             <select multiple size="2" class="form-control" id="selectRoleEd" name="role">
-                                <option value="1" name="ROLE_ADMIN">ADMIN</option>
-                                <option value="2" name="ROLE_USER">USER</option>
-                             </select>             
+                        <input class="form-control" readonly type="number" name="id" id="idEdit" value="${oneUserfromDB.id}"/>
+    
+                        <label for="username">Enter username: </label>
+                        <input class="form-control" type="text" name="username" id="usernameEdit" value=""/>
+    
+                        <label for="age">Enter age: </label>
+                        <input class="form-control" type="text" name="age" id="ageEdit" value=""/>
+    
+                        <label for="email">Enter email: </label>
+                        <input class="form-control" type="text" name="email" id="emailEdit" value=""/>
+                        
+                        <label for="password">Enter password: </label>
+                        <input class="form-control update-password" type="password" name="passwordEdit" id="password">
+    
+                        <label for="roles">Enter role: </label>
+                        <select class="form-control" size="2" name="roles" id="rolesEdit">
+                            <option>USER</option>
+                            <option>ADMIN</option>
+                        </select>
                     </div>
+                </div>
+
+                <div class="update-down">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-secondary me-md-2 update-close close-btn" type="button">Close</button>
+                        <button class="btn btn-primary update-edit" type="submit">Edit</button>
+                    </div>
+                </div>
                 </div>
             </div>
        `)
         modalEditUser.open()
         console.log('One user from DB: ', oneUserfromDB)
+
+        $(document).on("click", ".update-edit", function (){
+            //let roles = $("#rolesEdit").val();
+            const data = {
+                id: $("#idEdit").val(),
+                username: $("#usernameEdit").val(),
+                age: $("#ageEdit").val(),
+                email: $("#emailEdit").val(),
+                password: $("#passwordEdit").val(),
+                roles: getRol("#rolesEdit")
+            }
+
+            console.log('data = ', data)
+            sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT")
+            //$(".").hide()
+            //$('.table-users').children().remove()
+            modalEditUser.render()
+            modalEditUser.close()
+        })
+
+        $('.update-close').click(function () {
+            modalEditUser.close()
+        })
+
+        $('.close-btn').click(function () {
+            modalEditUser.close()
+        })
+
+
+
     }
     if (btnType === 'deleteUser') {
         const oneUserfromDB = allUsers.find(f => f.id === id)
@@ -135,7 +188,6 @@ document.addEventListener('click', event => {
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
                                 <option value="2" name="ROLE_USER">USER</option>
                              </select>                       
-                   
                     </div>
                 </div>   
                 <div>       
@@ -159,8 +211,7 @@ document.addEventListener('click', event => {
             fetch ('http://localhost:8080/api/users', {
                 method: "GET",
                 headers: {"Content-Type": "application/json; charset=UTF-8"}})
-                console.log('table users would be renew')
-                modalDeleteUser.close()
+            modalDeleteUser.close()
             })
         $(".delut1").click(function () {
             createTableUsers()
