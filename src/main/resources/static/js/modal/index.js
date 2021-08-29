@@ -28,7 +28,7 @@ const sendData = (url, data, method) => {
 function getRol(rol){
     if (rol.length === 2) {
         const roles = [{
-            id: 2, name: "ROLE_USER"
+            id: 2, name: "ROLE_USER",
         },
             { id: 1, name: "ROLE_ADMIN"
             }]
@@ -59,18 +59,3 @@ function deleteUserTest( url, data, method) {
         .then(data =>  data.json())
 }
 
-
-// function restartAllUser() {                                                     //table refreshing
-//     let UserTableBody = $(".table-users")
-//     UserTableBody.children().remove();
-//
-//     fetch("http://localhost:8080/api/users/")
-//         .then((response) => {
-//             response.json().then(data => data.forEach(function (item, i, data) {
-//                 let TableRow = createTableRow(item);
-//                 UserTableBody.append(TableRow);
-//             }));
-//         }).catch(error => {
-//         console.log(error);
-//     });
-// }
