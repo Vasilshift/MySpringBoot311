@@ -33,6 +33,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public void addRole(Role role) {
         roleRepository.save(role);
     }
