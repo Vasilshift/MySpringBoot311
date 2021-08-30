@@ -1,7 +1,7 @@
 
 function addUserToMainWindow() {
     const tableNewUser = `
-        <div class="update-content">
+        <divclass="form-control">
             <div class="form-group">
                 <div class="container new-user-content" style="width: 35%; left: 50%;text-align: center; font-weight: bold;">
                     <div class="form-group new-user-form">

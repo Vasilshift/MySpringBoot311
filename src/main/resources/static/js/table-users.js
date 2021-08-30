@@ -116,16 +116,14 @@ document.addEventListener('click', event => {
                            <option value="1" name="ROLE_ADMIN">ADMIN</option>
                            <option value="2" name="ROLE_USER">USER</option>
                         </select>   
+                    
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+                            <button class="btn btn-secondary me-md-2 update-close close-btn" type="button">Close</button>
+                            <button class="btn btn-primary update-edit" type="submit">Edit</button>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
-                        <button class="btn btn-secondary me-md-2 update-close close-btn" type="button">Close</button>
-                        <button class="btn btn-primary update-edit" type="submit">Edit</button>
-                    </div>
-                </div>
-                </div>
-            </div>
+            </div>  
        `)
         modalEditUser.open()
         console.log('One user from DB: ', oneUserfromDB)
@@ -154,30 +152,29 @@ document.addEventListener('click', event => {
     if (btnType === 'deleteUser') {
         const oneUserfromDB = allUsers.find(f => f.id === id)
         modalDeleteUser.setContent(`
-            <div class="update_body">
+            <div class="update-body">
                 <div class="update-content">
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input readonly type="number" th:field="*{id}" id="id" placeholder="${id}">
+                        <input class="form-control" readonly type="number" th:field="*{id}" id="id" placeholder="${id}">
                         <label for="firstName">Username</label>
-                        <input type="text" th:field="*{username}" id="firstName" placeholder="${oneUserfromDB.username}">
+                        <input class="form-control" type="text" th:field="*{username}" id="firstName" placeholder="${oneUserfromDB.username}">
                         <label for="age">Age</label>
-                        <input type="number" th:field="*{age}" id="age" placeholder="${oneUserfromDB.age}">
+                        <input class="form-control" type="number" th:field="*{age}" id="age" placeholder="${oneUserfromDB.age}">
                         <label for="email">Email</label>
-                        <input type="text" th:field="*{email}" id="email" placeholder="${oneUserfromDB.email}">
+                        <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="${oneUserfromDB.email}">
                         <label for="selectRoleEd"><b>Role</b></label>
                              <select multiple size="2" class="form-control" id="selectRoleEd" name="role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
                                 <option value="2" name="ROLE_USER">USER</option>
-                             </select>                       
+                             </select>                                           
+                       
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">       
+                            <button href="#" class="btn btn-secondary me-md-2 close-btn" data-btn="closeUserFromModal">Close</button>
+                            <button href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</button>
+                        </div>    
                     </div>
-                </div>   
-                <div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">       
-                        <button href="#" class="btn btn-secondary me-md-2 close-btn" data-btn="closeUserFromModal">Close</button>
-                        <button href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</button>
-                    </div>    
-                </div>           
+                </div>               
             </div>
        `)
         modalDeleteUser.open()
