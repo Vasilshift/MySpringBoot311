@@ -58,7 +58,6 @@ function getUsers() {
         })
 }
 
-
 function createTableUsers(){
     return (
         fetch(requrl).then(
