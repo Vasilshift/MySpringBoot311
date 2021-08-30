@@ -1,6 +1,6 @@
 
 function addUserToMainWindow() {
-    const tableOneUser = `
+    const tableNewUser = `
         <div class="update-content">
             <div class="form-group">
                 <div class="container new-user-content" style="width: 35%; left: 50%;text-align: center; font-weight: bold;">
@@ -15,8 +15,8 @@ function addUserToMainWindow() {
                         <input class="form-control" type="password" name="password" id="newPassword">
                         <label htmlFor="newRoles">Enter role: </label>
                         <select class="form-control" multiple size="2" name="roles" id="newRoles">
-                            <option selected>USER</option>
-                            <option>ADMIN</option>
+                           <option value="1" name="ROLE_ADMIN">ADMIN</option>
+                           <option value="2" name="ROLE_USER">USER</option>
                         </select>           
                         <button type="submit" class="btn btn-success new-user-btn " data-btn="new-user-btn-data-btn" style="margin: 3%">Add new user</button>
                     </div>
@@ -24,18 +24,19 @@ function addUserToMainWindow() {
             </div>
         </div>
     `
-    document.querySelector(".div-right-body-test").innerHTML = tableOneUser
+    document.querySelector(".div-right-body-test").innerHTML = tableNewUser
 }
 addUserToMainWindow()
 
 document.addEventListener('click', event => {
     const btnType = event.target.dataset.btn
+    //let roles = $("#newRoles").val();
     const newUserForAdd = {
-        "username": $("#newUsername").val(),
-        "age": $("#newAge").val(),
-        "email": $("#newEmail").val(),
-        "password": $("#newPassword").val(),
-        "roles": getRol('#newRoles')
+        username: $("#newUsername").val(),
+        age: $("#newAge").val(),
+        email: $("#newEmail").val(),
+        password: $("#newPassword").val(),
+        roles: rolesForm('#newRoles')
     }
     if (btnType === 'new-user-btn-data-btn') {
         console.log('newUserForAdd: ', newUserForAdd)

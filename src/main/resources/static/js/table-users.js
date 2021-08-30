@@ -15,10 +15,10 @@ function rol(u) {
 }
 
 let allUsers;
-fetch('http://localhost:8080/api/users')
-    .then(res => res.json())
-    .then(data => allUsers = data)
-    .then(() => console.log(allUsers))
+// fetch('http://localhost:8080/api/users')
+//     .then(res => res.json())
+//     .then(data => allUsers = data)
+//     .then(() => console.log(allUsers))
 
 function render() {
     const toHTML = u => `<div><tr>
@@ -36,27 +36,27 @@ function render() {
     a.innerHTML = htmlRendered
 }
 
-function getUsers() {
-    fetch('http://localhost:8080/api/users')
-        .then(res => res.json())
-        .then(result  => {
-            if (result.length > 0 ) {
-                let body = ""
-                result.forEach(u => {
-                    body += "<tr>"
-                    body += '<td>' + u.id + '</td>'
-                    body += '<td>' + u.username + '</td>'
-                    body += "<td>" + u.age + "</td>"
-                    body += "<td>" + u.email + "</td>"
-                    body += "<td>" + rol(u) + "</td>"
-                    body += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
-                    body += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
-
-                })
-                document.querySelector(".table-users-object").innerHTML = body
-            }
-        })
-}
+// function getUsers() {
+//     fetch('http://localhost:8080/api/users')
+//         .then(res => res.json())
+//         .then(result  => {
+//             if (result.length > 0 ) {
+//                 let body = ""
+//                 result.forEach(u => {
+//                     body += "<tr>"
+//                     body += '<td>' + u.id + '</td>'
+//                     body += '<td>' + u.username + '</td>'
+//                     body += "<td>" + u.age + "</td>"
+//                     body += "<td>" + u.email + "</td>"
+//                     body += "<td>" + rol(u) + "</td>"
+//                     body += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
+//                     body += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
+//
+//                 })
+//                 document.querySelector(".table-users-object").innerHTML = body
+//             }
+//         })
+// }
 
 
 function createTableUsers(){

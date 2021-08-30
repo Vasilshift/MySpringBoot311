@@ -25,27 +25,12 @@ const sendData = (url, data, method) => {
         })
 }
 
-function getRol(rol){
-    if (rol.length === 2) {
-        const roles = [{
-            id: 2, name: "ROLE_USER"
-        },
-            { id: 1, name: "ROLE_ADMIN"
-            }]
-        return roles;
-    }
-    if (rol.indexOf("USER")){
-        const roles = [{
-            id: 2, name: "ROLE_USER"
-        }]
-        return roles;
-    }
-    if (rol.indexOf("ADMIN")){
-        const roles = [{
-            id: 1, name: "ROLE_ADMIN"
-        }]
-        return roles;
-    }
+function rolesForm(r) {                                                     //get roles from form
+    let roles = [];
+    $(r).find("option:selected").each(function () {
+        roles.push({id: $(this).val(), name: $(this).attr("name") })
+    });
+    return roles;
 }
 
 function deleteUserTest( url, data, method) {
