@@ -1,12 +1,15 @@
 const modalEditUser = GM.modal({
     title: 'Edit user',
     closable: true,
+    content: '',
     width: '400px'
 })
 
 const modalDeleteUser = GM.modal({
     title: 'Delete user',
     closable: true,
+    content: '',
+    width: '400px'
 })
 
 const sendData = (url, data, method) => {

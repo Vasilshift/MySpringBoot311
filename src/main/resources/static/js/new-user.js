@@ -30,7 +30,6 @@ addUserToMainWindow()
 
 document.addEventListener('click', event => {
     const btnType = event.target.dataset.btn
-    //let roles = $("#newRoles").val();
     const newUserForAdd = {
         username: $("#newUsername").val(),
         age: $("#newAge").val(),

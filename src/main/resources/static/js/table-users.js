@@ -15,12 +15,12 @@ function rol(u) {
 }
 
 let allUsers;
-// fetch('http://localhost:8080/api/users')
-//     .then(res => res.json())
-//     .then(data => allUsers = data)
-//     .then(() => console.log(allUsers))
+fetch('http://localhost:8080/api/users')
+    .then(res => res.json())
+    .then(data => allUsers = data)
+    .then(() => console.log(allUsers))
 
-function render() {
+function renderTable() {
     const toHTML = u => `<div><tr>
                       <td>${u.id}</td>
                       <td>${u.username}</td>
@@ -36,27 +36,27 @@ function render() {
     a.innerHTML = htmlRendered
 }
 
-// function getUsers() {
-//     fetch('http://localhost:8080/api/users')
-//         .then(res => res.json())
-//         .then(result  => {
-//             if (result.length > 0 ) {
-//                 let body = ""
-//                 result.forEach(u => {
-//                     body += "<tr>"
-//                     body += '<td>' + u.id + '</td>'
-//                     body += '<td>' + u.username + '</td>'
-//                     body += "<td>" + u.age + "</td>"
-//                     body += "<td>" + u.email + "</td>"
-//                     body += "<td>" + rol(u) + "</td>"
-//                     body += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
-//                     body += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
-//
-//                 })
-//                 document.querySelector(".table-users-object").innerHTML = body
-//             }
-//         })
-// }
+function getUsers() {
+    fetch('http://localhost:8080/api/users')
+        .then(res => res.json())
+        .then(result  => {
+            if (result.length > 0 ) {
+                let body = ""
+                result.forEach(u => {
+                    body += "<tr>"
+                    body += '<td>' + u.id + '</td>'
+                    body += '<td>' + u.username + '</td>'
+                    body += "<td>" + u.age + "</td>"
+                    body += "<td>" + u.email + "</td>"
+                    body += "<td>" + rol(u) + "</td>"
+                    body += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
+                    body += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
+
+                })
+                document.querySelector(".table-users-object").innerHTML = body
+            }
+        })
+}
 
 
 function createTableUsers(){
@@ -109,13 +109,13 @@ document.addEventListener('click', event => {
                         <input class="form-control" type="text" name="email" id="emailEdit" value=""/>
                         
                         <label for="password">Enter password: </label>
-                        <input class="form-control update-password" type="password" name="passwordEdit" id="password">
+                        <input class="form-control update-password" type="password" name="password" id="passwordEdit">
     
                         <label for="roles">Enter role: </label>
-                        <select class="form-control" multiple="multiple" size="2" name="roles" id="rolesEdit">
-                            <option>USER</option>
-                            <option>ADMIN</option>
-                        </select>
+                        <select class="form-control" multiple size="2" name="roles" id="editRoles">
+                           <option value="1" name="ROLE_ADMIN">ADMIN</option>
+                           <option value="2" name="ROLE_USER">USER</option>
+                        </select>   
                     </div>
                 </div>
                 <div>
@@ -137,18 +137,16 @@ document.addEventListener('click', event => {
                 age: $("#ageEdit").val(),
                 email: $("#emailEdit").val(),
                 password: $("#passwordEdit").val(),
-                roles: getRol("#rolesEdit")
+                roles: rolesForm("#editRoles")
             }
             console.log('data = ', data)
             sendData("http://localhost:8080/api/users", JSON.stringify(data), "POST")
             //$(".").hide()
             //$('.table-users').children().remove()
-            modalEditUser.render()
+            //odalEditUser.render()
             modalEditUser.close()
         })
-        $('.update-close').click(function () {
-            modalEditUser.close()
-        })
+
         $('.close-btn').click(function () {
             modalEditUser.close()
         })
