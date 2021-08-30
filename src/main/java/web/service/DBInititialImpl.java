@@ -11,20 +11,21 @@ import javax.annotation.PostConstruct;
 import java.util.Collections;
 
 @Component
-public class DBInit {
+public class DBInititialImpl implements DBInitial {
 
      private final RoleRepository roleRepository;
      private final UserService userService;
      private final BCryptPasswordEncoder bcryptpasswordEncoder;
 
     @Autowired
-    public DBInit(RoleRepository roleRepository, UserService userService, BCryptPasswordEncoder bcryptpasswordEncoder) {
+    public DBInititialImpl(RoleRepository roleRepository, UserService userService, BCryptPasswordEncoder bcryptpasswordEncoder) {
         this.roleRepository = roleRepository;
         this.userService = userService;
         this.bcryptpasswordEncoder = bcryptpasswordEncoder;
     }
 
     @PostConstruct
+    @Override
     public void init() {
         Role roleAdmin = new Role();
         roleAdmin.setName("ROLE_ADMIN");
