@@ -1,5 +1,3 @@
-const GM = {}
-
 const modalEditUser = GM.modal({
     title: 'Edit user',
     closable: true,
