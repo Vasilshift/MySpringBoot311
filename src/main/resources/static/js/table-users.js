@@ -2,17 +2,7 @@
 const a = document.querySelector('.table-users-object')
 const requrl = 'http://localhost:8080/api/users'
 
-function rol(u) {
-    let userRole = "[";
-    for (let i = 0; i < u.roles.length; i++) {
-        userRole += u.roles[i].name.substring(5);
-        if (i != (u.roles.length - 1)) {
-        userRole += ", ";
-        }
-    }
-    userRole += "]";
-    return userRole;
-}
+
 
 let allUsers;
 fetch('http://localhost:8080/api/users')
@@ -53,37 +43,16 @@ function getUsers() {
                     body += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
 
                 })
-                document.querySelector(".table-users-object").innerHTML = body
+                $('.table-users-object').hide()
+                document.querySelector(".table-to-renew").innerHTML = body
             }
         })
+
 }
 
-function createTableUsers(){
-    return (
-        fetch(requrl).then(
-            res => {
-                res.json().then(
-                    data => {
-                        console.log('Display all users from database', data);
-                        let temp = "";
-                        data.forEach((u) => {
-                            temp += '<tr>'
-                            temp += '<td>' + u.id + '</td>'
-                            temp += '<td>' + u.username + '</td>'
-                            temp += "<td>" + u.age + "</td>"
-                            temp += "<td>" + u.email + "</td>"
-                            temp += "<td>" + rol(u) + "</td>"
-                            temp += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
-                            temp += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
-                            temp += "</tr>"
-                        })
-                        a.innerHTML = temp;
-                    })
-            })
-    )
-}
 
-createTableUsers()
+
+
 
 document.addEventListener('click', event => {
     event.preventDefault()
@@ -115,7 +84,6 @@ document.addEventListener('click', event => {
                            <option value="1" name="ROLE_ADMIN">ADMIN</option>
                            <option value="2" name="ROLE_USER">USER</option>
                         </select>   
-                    
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
                             <button class="btn btn-secondary me-md-2 update-close close-btn" type="button">Close</button>
                             <button class="btn btn-primary update-edit" type="submit">Edit</button>
@@ -127,7 +95,6 @@ document.addEventListener('click', event => {
         modalEditUser.open()
         console.log('One user from DB: ', oneUserfromDB)
         $(document).on("click", ".update-edit", function (){
-            //let roles = $("#rolesEdit").val();
             const data = {
                 id: $("#idEdit").val(),
                 username: $("#usernameEdit").val(),
@@ -137,12 +104,25 @@ document.addEventListener('click', event => {
                 roles: rolesForm("#editRoles")
             }
             console.log('data = ', data)
-            sendData("http://localhost:8080/api/users", JSON.stringify(data), "POST")
+            sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT")
             //$(".").hide()
-            //$('.table-users').children().remove()
-            //odalEditUser.render()
-            modalEditUser.close()
+
+            //restartTableUsers()
+
+            //restartAllUser()
+            //
+            //$('.table-users-object').children().remove()
+            //restartAllUser()
+            getUsers()
         })
+
+        $(document).on("click", ".update-edit", function () {
+            modalEditUser.close()
+            //
+
+        })
+
+
 
         $('.close-btn').click(function () {
             modalEditUser.close()

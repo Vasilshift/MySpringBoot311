@@ -39,7 +39,10 @@ document.addEventListener('click', event => {
     }
     if (btnType === 'new-user-btn-data-btn') {
         console.log('newUserForAdd: ', newUserForAdd)
-        sendData("http://localhost:8080/api/users", JSON.stringify(newUserForAdd), "PUT")
+        sendData("http://localhost:8080/api/users", JSON.stringify(newUserForAdd), "POST")
+        //$('.table-users-object').hide()
+        //getUsers()
     }
+
 })
 
