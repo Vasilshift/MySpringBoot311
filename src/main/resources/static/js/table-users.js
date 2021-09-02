@@ -176,16 +176,28 @@ document.addEventListener('click', event => {
             const data = {
                 id: $("#idEdit").val(),
                 username: $("#usernameEdit").val(),
+                password: $("#passwordEdit").val(),
                 age: $("#ageEdit").val(),
                 email: $("#emailEdit").val(),
-                password: $("#passwordEdit").val(),
                 roles: rolesForm("#editRoles")
             }
             console.log('data = ', data)
-            sendData("http://localhost:8080/api/users", JSON.stringify(data), "POST")
+
+            //sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT")
             //$(".").hide()
             //$('.table-users').children().remove()
             //odalEditUser.render()
+
+            fetch('http://localhost:8080/api/users', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(() => $('input').val(''))
+                .then(() => $('select').val(false))
+                .then(() => getUsers())
+
             modalEditUser.close()
         })
 
@@ -232,15 +244,16 @@ document.addEventListener('click', event => {
             fetch (urlForDeleteUser, {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json; charset=UTF-8"}})
-                console.log('table users would be renew')
-            fetch ('http://localhost:8080/api/users', {
-                method: "GET",
-                headers: {"Content-Type": "application/json; charset=UTF-8"}})
+                .then(() => $(allUsers).val(''))
+                //.then(() => $('select').val(false))
+                .then(() => getUsers())
+
+            
+
+
             modalDeleteUser.close()
             })
-        $(".delut1").click(function () {
-            createTableUsers()
-        })
+
         $('.close-btn').click(function () {
             modalDeleteUser.close()
         })
