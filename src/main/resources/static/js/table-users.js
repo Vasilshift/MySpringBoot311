@@ -20,62 +20,6 @@ fetch('http://localhost:8080/api/users')
     .then(data => allUsers = data)
     .then(() => console.log(allUsers))
 
-// function renderTable() {
-//     const toHTML = u => `<div><tr>
-//                       <td>${u.id}</td>
-//                       <td>${u.username}</td>
-//                       <td>${u.age}</td>
-//                       <td>${u.email}</td>
-//                       <td>${rol(u)}</td>
-//                       <td><a href="#" class="btn btn-primary" data-btn="editUser" data-id=${u.id}>Edit</a></td>
-//                       <td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id=${u.id}>Delete</a></td>
-//                       </tr>
-//                      </div>
-//                      `
-//     const htmlRendered = allUsers.map(toHTML).join('')
-//     a.innerHTML = htmlRendered
-// }
-
-// function createTableRow(u) {                                                    //table creating
-//     let userRole = "[";
-//     for (let i = 0; i < u.roles.length; i++) {
-//         userRole += u.roles[i].name.substring(5);
-//         if (i != (u.roles.length - 1)) {
-//             userRole += ", ";
-//         }
-//     }
-//     userRole += "]";
-//     return `<tr id="user_table_row">
-//         <td>${u.id}</td>
-//         <td>${u.username}</td>
-//         <td>${u.age}</td>
-//         <td>${userRole}</td>
-//         <td>
-//         <a href="/api/users/${u.id}" class="btn btn-info openEdit" >Edit</a>
-//         </td>
-//         <td>
-//         <a href="/api/users/${u.id}" class="btn btn-danger openDelete">Delete</a>
-//         </td>
-// </tr>`;
-// }
-//
-// function restartAllUser() {                                                     //table refreshing
-//     let UserTableBody = $("#table-users-object")
-//     UserTableBody.children().remove();
-//
-//     fetch("api/users")
-//         .then((response) => {
-//             response.json().then(data => data.forEach(function (item, i, data) {
-//                 let TableRow = createTableRow(item);
-//                 UserTableBody.append(TableRow);
-//             }));
-//         }).catch(error => {
-//         console.log(error);
-//     });
-// }
-//
-// restartAllUser()
-
 function getUsers() {
     fetch('http://localhost:8080/api/users')
         .then(result => result.json())
@@ -99,36 +43,6 @@ function getUsers() {
 }
 
 getUsers()
-
-//
-// function createTableUsers(){
-//
-//         fetch(requrl).then(
-//             res => {
-//                 res.json().then(
-//                     data => {
-//                         console.log('Display all users from database', data);
-//                         let temp = "";
-//                         data.forEach((u) => {
-//                             temp += '<tr>'
-//                             temp += '<td>' + u.id + '</td>'
-//                             temp += '<td>' + u.username + '</td>'
-//                             temp += "<td>" + u.age + "</td>"
-//                             temp += "<td>" + u.email + "</td>"
-//                             temp += "<td>" + u.roles + "</td>"
-//                             temp += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
-//                             temp += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
-//                             temp += "</tr>"
-//                         })
-//                         a.innerHTML = temp;
-//                     })
-//             })
-//
-// }
-//
-// createTableUsers()
-
-
 
 document.addEventListener('click', event => {
     event.preventDefault()
@@ -183,11 +97,6 @@ document.addEventListener('click', event => {
             }
             console.log('data = ', data)
 
-            //sendData("http://localhost:8080/api/users", JSON.stringify(data), "PUT")
-            //$(".").hide()
-            //$('.table-users').children().remove()
-            //odalEditUser.render()
-
             fetch('http://localhost:8080/api/users', {
                 method: 'PUT',
                 headers: {
@@ -197,7 +106,6 @@ document.addEventListener('click', event => {
             }).then(() => $('input').val(''))
                 .then(() => $('select').val(false))
                 .then(() => getUsers())
-
             modalEditUser.close()
         })
 
@@ -223,8 +131,7 @@ document.addEventListener('click', event => {
                              <select multiple size="2" class="form-control" id="selectRoleEd" name="role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
                                 <option value="2" name="ROLE_USER">USER</option>
-                             </select>                                           
-                       
+                             </select>                                                         
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">       
                             <button href="#" class="btn btn-secondary me-md-2 close-btn" data-btn="closeUserFromModal">Close</button>
                             <button href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</button>
@@ -235,7 +142,6 @@ document.addEventListener('click', event => {
        `)
         modalDeleteUser.open()
         console.log('One user from DB: ', oneUserfromDB)
-
         let idUserToDelete = oneUserfromDB.id
         console.log('idUserToDelete= ', idUserToDelete)
         let urlForDeleteUser = "http://localhost:8080/api/users/" + idUserToDelete
@@ -245,12 +151,7 @@ document.addEventListener('click', event => {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json; charset=UTF-8"}})
                 .then(() => $(allUsers).val(''))
-                //.then(() => $('select').val(false))
                 .then(() => getUsers())
-
-            
-
-
             modalDeleteUser.close()
             })
 

@@ -56,29 +56,5 @@ document.addEventListener('click', event => {
     }
 })
 
-// $(document).ready(function () {
-//     //restartAllUser();
-//     $('#button-add-user').on('click', function (event) {                                  //adding user
-//         let user = {
-//             username: $("#newUsername").val(),
-//             password: $("#newPassword").val(),
-//             age: $("#newAge").val(),
-//             email: $("#newEmail"),
-//             roles: rolesForm("#newRoles")
-//         }
-//         console.log(user);
-//         fetch("api/users", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json;charset=utf-8"
-//             },
-//             body: JSON.stringify(user)
-//         })
-//             //.then(() => $('input').val('')) //fields cleaning
-//             //.then(() => $('select').val(false))
-//             //.then(() => openTabById('nav-home'))
-//             //.then(() => restartAllUser());
-//
-//     })
-// })
+
 
