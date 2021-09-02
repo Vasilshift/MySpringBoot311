@@ -12,21 +12,21 @@ const modalDeleteUser = GM.modal({
     width: '500px'
 })
 
-const sendData = (url, data, method) => {
-    const response = fetch(url, {
-        method : method,
-        headers: {
-            "Content-Type": "application/json;charset=utf-8"
-        },
-        body: data,
-    })
-        .then(data => {
-            if (!data.ok){
-                throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response.status}`);
-            }
-            return data.json();
-        })
-}
+// const sendData = (url, data, method) => {
+//     const response = fetch(url, {
+//         method : method,
+//         headers: {
+//             "Content-Type": "application/json;charset=utf-8"
+//         },
+//         body: data,
+//     })
+//         .then(data => {
+//             if (!data.ok){
+//                 throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response.status}`);
+//             }
+//             return data.json();
+//         })
+// }
 
 function rolesForm(r) {                                                     //get roles from form
     let roles = [];
