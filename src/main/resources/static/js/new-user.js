@@ -40,24 +40,17 @@ document.addEventListener('click', event => {
         age: $("#newAge").val(),
         email: $("#newEmail").val(),
         password: $("#newPassword").val(),
-        roles: rol('#newRoles')
+        roles: rolesForm('#newRoles')
     }
     if (btnType === 'new-user-btn-data-btn') {
         console.log('user to add: ', user)
-            const rawResponse = fetch('http://localhost:8080/api/users', {
+            fetch('http://localhost:8080/api/users', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(user)
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                })
     }
 })
 

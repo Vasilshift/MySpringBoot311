@@ -32,7 +32,7 @@ function rolesForm(r) {                                                     //ge
     let roles = [];
     $(r).find("option:selected").each(function () {
         roles.push({id: $(this).val(), name: $(this).attr("name") })
-    });
+    })
     return roles;
 }
 
