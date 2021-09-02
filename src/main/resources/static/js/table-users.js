@@ -15,10 +15,10 @@ function rol(u) {
 }
 
 let allUsers;
-fetch('http://localhost:8080/api/users')
-    .then(res => res.json())
-    .then(data => allUsers = data)
-    .then(() => console.log(allUsers))
+// fetch('http://localhost:8080/api/users')
+//     .then(res => res.json())
+//     .then(data => allUsers = data)
+//     .then(() => console.log(allUsers))
 
 function renderTable() {
     const toHTML = u => `<div><tr>
@@ -36,54 +36,100 @@ function renderTable() {
     a.innerHTML = htmlRendered
 }
 
+// function createTableRow(u) {                                                    //table creating
+//     let userRole = "[";
+//     for (let i = 0; i < u.roles.length; i++) {
+//         userRole += u.roles[i].name.substring(5);
+//         if (i != (u.roles.length - 1)) {
+//             userRole += ", ";
+//         }
+//     }
+//     userRole += "]";
+//     return `<tr id="user_table_row">
+//         <td>${u.id}</td>
+//         <td>${u.username}</td>
+//         <td>${u.age}</td>
+//         <td>${userRole}</td>
+//         <td>
+//         <a href="/api/users/${u.id}" class="btn btn-info openEdit" >Edit</a>
+//         </td>
+//         <td>
+//         <a href="/api/users/${u.id}" class="btn btn-danger openDelete">Delete</a>
+//         </td>
+// </tr>`;
+// }
+//
+// function restartAllUser() {                                                     //table refreshing
+//     let UserTableBody = $("#table-users-object")
+//     UserTableBody.children().remove();
+//
+//     fetch("api/users")
+//         .then((response) => {
+//             response.json().then(data => data.forEach(function (item, i, data) {
+//                 let TableRow = createTableRow(item);
+//                 UserTableBody.append(TableRow);
+//             }));
+//         }).catch(error => {
+//         console.log(error);
+//     });
+// }
+//
+// restartAllUser()
+
+
+
 function getUsers() {
     fetch('http://localhost:8080/api/users')
-        .then(res => res.json())
-        .then(result  => {
-            if (result.length > 0 ) {
+        .then(result => result.json())
+        .then(user => {
                 let body = ""
-                result.forEach(u => {
-                    body += "<tr>"
-                    body += '<td>' + u.id + '</td>'
-                    body += '<td>' + u.username + '</td>'
-                    body += "<td>" + u.age + "</td>"
-                    body += "<td>" + u.email + "</td>"
-                    body += "<td>" + rol(u) + "</td>"
-                    body += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
-                    body += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
-
+                user.forEach(u => {
+                    body += `
+                      <tr>
+                     <td> ${u.id}</td>
+                     <td> ${u.username}</td>
+                     <td> ${u.age} </td>
+                     <td> ${u.email} </td>
+                     <td> ${rol(u)} </td>
+                     <td><a href="#" class="btn btn-primary" data-btn="editUser" data-id="${u.id}">Edit</a></td>
+                     <td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id="${u.id}">Delete</a></td>
+                     </tr>
+                `
                 })
-                document.querySelector(".table-users-object").innerHTML = body
-            }
+                document.querySelector("#table-users-object").innerHTML = body
         })
 }
 
-function createTableUsers(){
-    return (
-        fetch(requrl).then(
-            res => {
-                res.json().then(
-                    data => {
-                        console.log('Display all users from database', data);
-                        let temp = "";
-                        data.forEach((u) => {
-                            temp += '<tr>'
-                            temp += '<td>' + u.id + '</td>'
-                            temp += '<td>' + u.username + '</td>'
-                            temp += "<td>" + u.age + "</td>"
-                            temp += "<td>" + u.email + "</td>"
-                            temp += "<td>" + rol(u) + "</td>"
-                            temp += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
-                            temp += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
-                            temp += "</tr>"
-                        })
-                        a.innerHTML = temp;
-                    })
-            })
-    )
-}
+getUsers()
+//
+// function createTableUsers(){
+//
+//         fetch(requrl).then(
+//             res => {
+//                 res.json().then(
+//                     data => {
+//                         console.log('Display all users from database', data);
+//                         let temp = "";
+//                         data.forEach((u) => {
+//                             temp += '<tr>'
+//                             temp += '<td>' + u.id + '</td>'
+//                             temp += '<td>' + u.username + '</td>'
+//                             temp += "<td>" + u.age + "</td>"
+//                             temp += "<td>" + u.email + "</td>"
+//                             temp += "<td>" + u.roles + "</td>"
+//                             temp += `<td><a href="#" class="btn btn-primary" data-btn="editUser" data-id='${u.id}'>Edit</a></td>`
+//                             temp += `<td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id='${u.id}'>Delete</a></td>`
+//                             temp += "</tr>"
+//                         })
+//                         a.innerHTML = temp;
+//                     })
+//             })
+//
+// }
+//
+// createTableUsers()
 
-createTableUsers()
+
 
 document.addEventListener('click', event => {
     event.preventDefault()
