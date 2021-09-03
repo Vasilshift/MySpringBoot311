@@ -1,7 +1,3 @@
-
-const a = document.querySelector('.table-users-object')
-const requrl = 'http://localhost:8080/api/users'
-
 function rol(u) {
     let userRole = "[";
     for (let i = 0; i < u.roles.length; i++) {
@@ -133,8 +129,8 @@ document.addEventListener('click', event => {
                                 <option value="2" name="ROLE_USER">USER</option>
                              </select>                                                         
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">       
-                            <button href="#" class="btn btn-secondary me-md-2 close-btn" data-btn="closeUserFromModal">Close</button>
-                            <button href="#" class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</button>
+                            <button class="btn btn-secondary me-md-2 close-btn" data-btn="closeUserFromModal">Close</button>
+                            <button class="btn btn-danger delut delut1" data-btn="deleteUserFromModal" id="deluser">Delete</button>
                         </div>    
                     </div>
                 </div>               
