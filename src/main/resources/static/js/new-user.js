@@ -1,4 +1,3 @@
-
 function addUserToMainWindow() {
     const tableNewUser = `
         <divclass="form-control">

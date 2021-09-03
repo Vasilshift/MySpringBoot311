@@ -8,7 +8,6 @@ import web.model.Role;
 import web.model.User;
 import web.repository.RoleRepository;
 import web.repository.UserRepository;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
