@@ -55,13 +55,13 @@ document.addEventListener('click', event => {
                 <div class="update-content">
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input class="form-control" readonly type="number" name="id" id="idEdit" value="${oneUserfromDB.id}"/>
+                        <input class="form-control" readonly type="number" name="id" id="idEdit" value="${id}"/>
     
                         <label for="username">Enter username: </label>
                         <input class="form-control" type="text" name="username" id="usernameEdit" value=""/>
     
                         <label for="age">Enter age: </label>
-                        <input class="form-control" type="text" name="age" id="ageEdit" value=""/>
+                        <input class="form-control" type="number" name="age" id="ageEdit" value=""/>
     
                         <label for="email">Enter email: </label>
                         <input class="form-control" type="text" name="email" id="emailEdit" value=""/>
@@ -114,19 +114,20 @@ document.addEventListener('click', event => {
         })
     }
     if (btnType === 'deleteUser') {
+
         const oneUserfromDB = allUsers.find(f => f.id === id)
         modalDeleteUser.setContent(`
             <div class="update-body">
                 <div class="update-content">
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input class="form-control" readonly type="number" th:field="*{id}" id="id" placeholder="${id}">
-                        <label for="firstName">Username</label>
-                        <input class="form-control" type="text" th:field="*{username}" id="firstName" placeholder="${oneUserfromDB.username}">
+                        <input class="form-control" readonly type="number" id="id" placeholder="${id}">
+                        <label for="username">Username</label>
+                        <input class="form-control" readonly type="text"  id="username" placeholder="${oneUserfromDB.username}">
                         <label for="age">Age</label>
-                        <input class="form-control" type="number" th:field="*{age}" id="age" placeholder="${oneUserfromDB.age}">
+                        <input class="form-control" readonly type="number"  id="age" placeholder="${oneUserfromDB.age}">
                         <label for="email">Email</label>
-                        <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="${oneUserfromDB.email}">
+                        <input class="form-control" readonly type="text"  id="email" placeholder="${oneUserfromDB.email}">
                         <label for="selectRoleEd"><b>Role</b></label>
                              <select multiple size="2" class="form-control" id="selectRoleEd" name="role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>

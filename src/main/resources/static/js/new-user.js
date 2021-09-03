@@ -11,7 +11,7 @@ function addUserToMainWindow() {
                         <input class="form-control" type="password" name="password" id="newPassword">
                         
                         <label htmlFor="newAge">Enter age: </label>
-                        <input class="form-control" type="text" name="age" id="newAge" value=""/>
+                        <input class="form-control" type="number" name="age" id="newAge" value=""/>
                         
                         <label htmlFor="newEmail">Enter email: </label>
                         <input class="form-control" type="text" name="email" id="newEmail" value=""/>
