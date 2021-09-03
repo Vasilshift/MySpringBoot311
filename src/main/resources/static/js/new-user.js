@@ -50,9 +50,11 @@ document.addEventListener('click', event => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(user)
-            }).then(() => $('input').val(''))
+            })
+                .then(() => $('input').val(''))
                 .then(() => $('select').val(false))
                 .then(() => getUsers())
+        getUsers()
     }
 })
 
