@@ -146,7 +146,7 @@ document.addEventListener('click', event => {
             fetch (urlForDeleteUser, {
                 method: "DELETE",
                 headers: {"Content-Type": "application/json; charset=UTF-8"}})
-                .then(() => $(allUsers).val(''))
+                // .then(() => $(allUsers).val(''))
                 .then(() => getUsers())
             modalDeleteUser.close()
             })
