@@ -54,13 +54,13 @@ document.addEventListener('click', event => {
                         <input class="form-control" readonly type="number" name="id" id="idEdit" value="${id}"/>
     
                         <label for="username">Enter username: </label>
-                        <input class="form-control" type="text" name="username" id="usernameEdit" value=""/>
+                        <input class="form-control" type="text" name="username" id="usernameEdit" value="${oneUserfromDB.username}"/>
     
                         <label for="age">Enter age: </label>
-                        <input class="form-control" type="text" name="age" id="ageEdit" value=""/>
+                        <input class="form-control" type="text" name="age" id="ageEdit" value="${oneUserfromDB.age}"/>
     
                         <label for="email">Enter email: </label>
-                        <input class="form-control" type="text" name="email" id="emailEdit" value=""/>
+                        <input class="form-control" type="text" name="email" id="emailEdit" value="${oneUserfromDB.email}"/>
                         
                         <label for="password">Enter password: </label>
                         <input class="form-control update-password" type="password" name="password" id="passwordEdit">
@@ -68,7 +68,7 @@ document.addEventListener('click', event => {
                         <label for="roles">Enter role: </label>
                         <select class="form-control" multiple size="2" name="roles" id="editRoles">
                            <option value="1" name="ROLE_ADMIN">ADMIN</option>
-                           <option value="2" name="ROLE_USER">USER</option>
+                           <option value="2" selected name="ROLE_USER">USER</option>
                         </select>   
                     
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
