@@ -1,27 +1,13 @@
 package web.controller;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import web.model.User;
-import web.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import web.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class AdminController {
-
-    private final UserService userService;
-    private final BCryptPasswordEncoder bcryptpasswordEncoder;
-
-    @Autowired
-    public AdminController(UserService userService, BCryptPasswordEncoder bcryptpasswordEncoder) {
-        this.userService = userService;
-        this.bcryptpasswordEncoder = bcryptpasswordEncoder;
-    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String printWelcome(Model model) {

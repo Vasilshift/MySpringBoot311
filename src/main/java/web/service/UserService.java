@@ -9,13 +9,12 @@ public interface UserService  {
 
     List<User> findAll();
 
-    void addRolesToUser(User user, String[] roleView);
-
     User saveUser(User user);
 
     void deleteById(Long id);
 
     User loadUserByUsername(String username);
 
+    void addRolesToUser(User user, String[] roleView);
 
 }

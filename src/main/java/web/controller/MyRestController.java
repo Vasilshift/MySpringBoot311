@@ -6,10 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
-import web.repository.RoleRepository;
 import web.service.RoleService;
 import web.service.UserService;
-
 
 @RestController
 @RequestMapping("/api")

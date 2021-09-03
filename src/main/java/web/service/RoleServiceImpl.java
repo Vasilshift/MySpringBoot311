@@ -49,10 +49,10 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.save(role);
     }
 
+    @Transactional
     @Override
     public void setupRoles(User user){
         Set<Role> rolesSet = new HashSet<>();
-
         if (user.getRoles().contains(roleRepository.findRoleByName("ROLE_ADMIN"))) {
             rolesSet.add(roleRepository.findRoleByName("ROLE_ADMIN"));
         }
