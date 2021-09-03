@@ -55,7 +55,7 @@ document.addEventListener('click', event => {
                 <div class="update-content">
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input class="form-control" readonly type="number" name="id" id="idEdit" value="${oneUserfromDB.id}"/>
+                        <input class="form-control" readonly type="number" name="id" id="idEdit" value="${id}"/>
     
                         <label for="username">Enter username: </label>
                         <input class="form-control" type="text" name="username" id="usernameEdit" value=""/>
