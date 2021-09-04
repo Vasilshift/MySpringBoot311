@@ -122,11 +122,11 @@ document.addEventListener('click', event => {
                         <label for="fileldiddel">ID</label>
                         <input class="form-control" readonly type="number" id="fileldiddel" placeholder="${id}">
                         <label for="fileldUsernameDel">Username</label>
-                        <input class="form-control" readonly type="text" id="fileldUsernameDel">
+                        <input class="form-control" readonly type="text" id="fileldUsernameDel" name="username">
                         <label for="fieldAgeDel">Age</label>
-                        <input class="form-control" readonly type="number" id="fieldAgeDel">
+                        <input class="form-control" readonly type="number" id="fieldAgeDel" name="age">
                         <label for="fieldEmailDel">Email</label>
-                        <input class="form-control" readonly type="text" id="fieldEmailDel">
+                        <input class="form-control" readonly type="text" id="fieldEmailDel" name="email">
                         <label for="selectRoleDel"><b>Role</b></label>
                              <select multiple size="2" class="form-control" id="selectRoleDel" name="role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
