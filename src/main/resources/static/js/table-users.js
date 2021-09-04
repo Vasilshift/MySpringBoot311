@@ -116,13 +116,13 @@ document.addEventListener('click', event => {
                 <div class="update-content">
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input class="form-control" readonly type="number" th:field="*{id}" id="id" placeholder="${id}">
+                        <input class="form-control" readonly type="number" id="id" placeholder="${id}">
                         <label for="firstName">Username</label>
-                        <input class="form-control" readonly type="text" th:field="*{username}" id="firstName" placeholder="${oneUserfromDB.username}">
+                        <input class="form-control" readonly type="text" id="firstName">
                         <label for="age">Age</label>
-                        <input class="form-control" readonly type="number" th:field="*{age}" id="age" placeholder="${oneUserfromDB.age}">
+                        <input class="form-control" readonly type="number" id="age">
                         <label for="email">Email</label>
-                        <input class="form-control" readonly type="text" th:field="*{email}" id="email" placeholder="${oneUserfromDB.email}">
+                        <input class="form-control" readonly type="text" id="email">
                         <label for="selectRoleEd"><b>Role</b></label>
                              <select multiple size="2" class="form-control" id="selectRoleEd" name="role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
