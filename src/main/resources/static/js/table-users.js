@@ -155,6 +155,12 @@ document.addEventListener('click', event => {
             modalDeleteUser.close()
         })
     }   //  end   if (btnType === 'deleteUser')
+
+    if ($(event.target).hasClass('logout')) {
+        document.location.replace("/logout")
+    }
+
+
 })
 
 
