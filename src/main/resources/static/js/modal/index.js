@@ -20,5 +20,17 @@ function rolesForm(r) {
     return roles;
 }
 
+function formRoleSelect(user, adress) {                                         //selet roles on form
+    const select = document.getElementById(adress)
+        .getElementsByTagName('option')
 
+    for (let i of user.roles) {
+        if (i.name === 'ROLE_ADMIN') {
+            select[0].selected = true
+        }
+        if (i.name === 'ROLE_USER') {
+            select[1].selected = true
+        }
+    }
+}
 

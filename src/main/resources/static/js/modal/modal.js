@@ -45,7 +45,7 @@ function _createModal(options) {
 }
 
 GM.modal = function (options) {
-    const destroyed = false
+    let destroyed = false
     const modal = {
         open() {
             if (destroyed) {return console.log('Modal is destroyed')
@@ -68,7 +68,7 @@ GM.modal = function (options) {
         destroy() {
             $modal.parentNode.removeChild($modal)
             $modal.removeEventListener('click', listener)
-            // destroyed = true
+             destroyed = true
         },
         setContent(html) {
             $modal.querySelector('[data-content]').innerHTML = html
