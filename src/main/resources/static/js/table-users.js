@@ -51,7 +51,6 @@ document.addEventListener('click', event => {
         fetch("http://localhost:8080/api/users/" + id)
             .then(res => res.json())
             .then(data => {
-                //$("#id").val(data.id);
                 $("#usernameEdit").val(data.username);
                 $("#ageEdit").val(data.age);
                 $("#emailEdit").val(data.email);
@@ -126,7 +125,6 @@ document.addEventListener('click', event => {
             fetch("http://localhost:8080/api/users/" + id)
                 .then(res => res.json())
                 .then(data => {
-                    //$("#id").val(data.id);
                     $("#fileldUsernameDel").val(data.username);
                     $("#fieldAgeDel").val(data.age);
                     $("#fieldEmailDel").val(data.email);
