@@ -29,7 +29,7 @@ function getUsers() {
                      <td> ${u.age} </td>
                      <td> ${u.email} </td>
                      <td> ${rol(u)} </td>
-                     <td><a href="#" class="btn btn-primary" data-btn="editUser" data-id="${u.id}">Edit</a></td>
+                     <td><a href="#" class="btn btn-primary openEdit" data-btn="editUser" data-id="${u.id}">Edit</a></td>
                      <td><a href="#" class="btn btn-danger" data-btn="deleteUser" data-id="${u.id}">Delete</a></td>
                      </tr>
                 `
@@ -44,10 +44,19 @@ document.addEventListener('click', event => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
     const id = +event.target.dataset.id
-
+    const oneUserfromDB = allUsers.find(f => f.id === id)
 
     if (btnType === 'editUser') {
-        const oneUserfromDB = allUsers.find(f => f.id === id)
+
+        fetch("http://localhost:8080/api/users/" + id)
+            .then(res => res.json())
+            .then(data => {
+                //$("#id").val(data.id);
+                $("#usernameEdit").val(data.username);
+                $("#ageEdit").val(data.age);
+                $("#emailEdit").val(data.email);
+            })
+
         modalEditUser.setContent(`
            <div class="update-body">
                 <div class="update-content">
@@ -56,13 +65,13 @@ document.addEventListener('click', event => {
                         <input class="form-control" readonly type="number" name="id" id="idEdit" value="${id}"/>
     
                         <label for="username">Enter username: </label>
-                        <input class="form-control" type="text" name="username" id="usernameEdit" placeholder="${oneUserfromDB.username}"/>
+                        <input class="form-control usernameToForm" type="text" name="username" id="usernameEdit"/>
     
                         <label for="age">Enter age: </label>
-                        <input class="form-control" type="text" name="age" id="ageEdit" placeholder="${oneUserfromDB.age}"/>
+                        <input class="form-control" type="text" name="age" id="ageEdit"/>
     
                         <label for="email">Enter email: </label>
-                        <input class="form-control" type="text" name="email" id="emailEdit" placeholder="${oneUserfromDB.email}"/>
+                        <input class="form-control" type="text" name="email" id="emailEdit"/>
                         
                         <label for="password">Enter password: </label>
                         <input class="form-control update-password" type="password" name="password" id="passwordEdit">
@@ -82,7 +91,7 @@ document.addEventListener('click', event => {
             </div>  
        `)
         modalEditUser.open()
-        console.log('One user from DB: ', oneUserfromDB)
+
         $(document).on("click", ".update-edit", function (){
             //let roles = $("#rolesEdit").val();
             const data = {
@@ -113,7 +122,16 @@ document.addEventListener('click', event => {
     }
 
     if (btnType === 'deleteUser') {
-        const oneUserfromDB = allUsers.find(f => f.id === id)
+
+            fetch("http://localhost:8080/api/users/" + id)
+                .then(res => res.json())
+                .then(data => {
+                    //$("#id").val(data.id);
+                    $("#fileldUsernameDel").val(data.username);
+                    $("#fieldAgeDel").val(data.age);
+                    $("#fieldEmailDel").val(data.email);
+                })
+
         console.log(oneUserfromDB)
         modalDeleteUser.setContent(`
             <div class="update-body">
@@ -121,13 +139,13 @@ document.addEventListener('click', event => {
                     <div class="form-group">
                         <label for="fileldiddel">ID</label>
                         <input class="form-control" readonly type="number" id="fileldiddel" placeholder="${id}">
-                        <label for="fileldUsernameDel">Username</label>
+                        <label for="username">Username</label>
                         <input class="form-control" readonly type="text" id="fileldUsernameDel" name="username">
-                        <label for="fieldAgeDel">Age</label>
+                        <label for="age">Age</label>
                         <input class="form-control" readonly type="number" id="fieldAgeDel" name="age">
-                        <label for="fieldEmailDel">Email</label>
+                        <label for="email">Email</label>
                         <input class="form-control" readonly type="text" id="fieldEmailDel" name="email">
-                        <label for="selectRoleDel"><b>Role</b></label>
+                        <label for="role"><b>Role</b></label>
                              <select multiple size="2" class="form-control" id="selectRoleDel" name="role">
                                 <option value="1" name="ROLE_ADMIN">ADMIN</option>
                                 <option value="2" name="ROLE_USER">USER</option>
@@ -168,7 +186,6 @@ document.addEventListener('click', event => {
     if ($(event.target).hasClass('logout')) {
         document.location.replace("/logout")
     }
-
 
 })
 
