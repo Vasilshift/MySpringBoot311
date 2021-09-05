@@ -44,10 +44,18 @@ document.addEventListener('click', event => {
     event.preventDefault()
     const btnType = event.target.dataset.btn
     const id = +event.target.dataset.id
-
+    const oneUserfromDB = allUsers.find(f => f.id === id)
 
     if (btnType === 'editUser') {
-        const oneUserfromDB = allUsers.find(f => f.id === id)
+
+        fetch("http://localhost:8080/api/users/" + id)
+            .then(res => res.json())
+            .then(data => {
+                $("#fileldUsernameDel").val(data.username);
+                $("#fieldAgeDel").val(data.age);
+                $("#fieldEmailDel").val(data.email);
+            })
+
         modalEditUser.setContent(`
            <div class="update-body">
                 <div class="update-content">
@@ -113,8 +121,15 @@ document.addEventListener('click', event => {
     }
 
     if (btnType === 'deleteUser') {
-        const oneUserfromDB = allUsers.find(f => f.id === id)
-        console.log(oneUserfromDB)
+
+        fetch("http://localhost:8080/api/users/" + id)
+            .then(res => res.json())
+            .then(data => {
+                $("#fileldUsernameDel").val(data.username);
+                $("#fieldAgeDel").val(data.age);
+                $("#fieldEmailDel").val(data.email);
+            })
+
         modalDeleteUser.setContent(`
             <div class="update-body">
                 <div class="update-content">
