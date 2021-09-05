@@ -51,9 +51,9 @@ document.addEventListener('click', event => {
         fetch("http://localhost:8080/api/users/" + id)
             .then(res => res.json())
             .then(data => {
-                $("#fileldUsernameDel").val(data.username);
-                $("#fieldAgeDel").val(data.age);
-                $("#fieldEmailDel").val(data.email);
+                $("#usernameEdit").val(data.username);
+                $("#ageEdit").val(data.age);
+                $("#emailEdit").val(data.email);
             })
 
         modalEditUser.setContent(`
@@ -157,8 +157,7 @@ document.addEventListener('click', event => {
        `)
         modalDeleteUser.open()
         console.log('One user from DB: ', oneUserfromDB)
-        const idUserToDelete = id
-        console.log('idUserToDelete= ', id)
+
         let urlForDeleteUser = "http://localhost:8080/api/users/" + id
         console.log('urlForDeleteUser = ', urlForDeleteUser)
         $('#deluser').on('click', function (event) {
