@@ -52,6 +52,7 @@ document.addEventListener('click', event => {
             }).then(() => $('input').val(''))
                 .then(() => $('select').val(false))
                 .then(() => getUsers())
+                .then(() => openTabById('nav-home'))
     }
 })
 

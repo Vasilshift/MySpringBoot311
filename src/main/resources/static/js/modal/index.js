@@ -20,5 +20,9 @@ function rolesForm(r) {
     return roles;
 }
 
+function openTabById(tab) {
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+}
+
 
 

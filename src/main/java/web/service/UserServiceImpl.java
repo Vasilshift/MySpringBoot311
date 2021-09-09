@@ -24,13 +24,13 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public User findById(Long id){
         return userRepository.findById(id).get();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<User> findAll(){
         return userRepository.findAll();
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
